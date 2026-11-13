@@ -372,7 +372,7 @@
         }
 
         /* ============================================================
-                   BOOKS GRID (no cover images — clean text cards)
+                   BOOKS GRID (with book cover images)
                    ============================================================ */
         .category-books {
             padding: 40px 0 80px;
@@ -381,19 +381,63 @@
 
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 14px;
         }
 
         .book-card {
             background: var(--white);
             border-radius: var(--radius);
-            padding: 24px 26px 26px;
+            overflow: hidden;
             box-shadow: var(--shadow-sm);
             transition: var(--transition);
             border: 1px solid var(--teal-50);
             display: flex;
             flex-direction: column;
+            min-width: 0;
+        }
+
+        .book-cover-link {
+            position: relative;
+            display: block;
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+            background: linear-gradient(145deg, var(--teal-100), var(--cream-dark));
+            border-bottom: 1px solid var(--teal-100);
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.4s ease;
+        }
+
+        .book-card:hover .book-cover {
+            transform: scale(1.04);
+        }
+
+        .cover-fallback-icon {
+            display: none;
+            position: absolute;
+            inset: 0;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--teal-500);
+        }
+
+        .book-cover-link.cover-fallback .cover-fallback-icon {
+            display: flex;
+        }
+
+        .book-content {
+            padding: 10px 11px 11px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
 
         .book-card:hover {
@@ -408,25 +452,33 @@
             font-weight: 600;
             color: var(--teal-400);
             background: var(--teal-50);
-            padding: 2px 12px;
+            padding: 1px 8px;
             border-radius: 50px;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             align-self: flex-start;
             letter-spacing: 0.5px;
         }
 
         .book-card .title {
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 0.88rem;
             color: var(--gray-900);
             margin-bottom: 4px;
-            line-height: 1.4;
+            line-height: 1.35;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .book-card .author {
-            font-size: 0.9rem;
+            font-size: 0.72rem;
             color: var(--gray-500);
-            margin-bottom: 16px;
+            margin-bottom: 9px;
+            line-height: 1.35;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .book-card .author i {
@@ -436,8 +488,8 @@
 
         .book-card .book-actions {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 6px;
+            flex-wrap: nowrap;
             margin-top: auto;
             align-items: center;
         }
@@ -445,9 +497,9 @@
         .book-card .book-actions .btn {
             flex: 1;
             justify-content: center;
-            padding: 8px 14px;
-            font-size: 0.82rem;
-            min-width: 70px;
+            padding: 7px 8px;
+            font-size: 0.68rem;
+            min-width: 34px;
         }
 
         .book-card .book-actions .btn-read {
@@ -692,30 +744,36 @@
             }
 
             .books-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 12px;
             }
 
-            .book-card {
-                padding: 18px 16px 20px;
+            .book-content {
+                padding: 9px 9px 10px;
             }
 
             .book-card .title {
-                font-size: 0.95rem;
+                font-size: 0.82rem;
             }
 
             .book-card .author {
-                font-size: 0.8rem;
+                font-size: 0.68rem;
+                margin-bottom: 8px;
+            }
+
+            .book-card .book-actions {
+                gap: 6px;
             }
 
             .book-card .book-actions .btn {
-                font-size: 0.7rem;
-                padding: 6px 10px;
-                min-width: 50px;
+                font-size: 0.62rem;
+                padding: 6px 4px;
             }
 
+            .book-card .book-actions .btn-download,
             .book-card .book-actions .btn-share {
-                min-width: 36px;
+                flex-basis: 30px;
+                min-width: 30px;
                 padding: 6px;
             }
 
@@ -736,33 +794,40 @@
             }
 
             .books-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 9px;
             }
 
-            .book-card {
-                padding: 14px 12px 16px;
+            .book-content {
+                padding: 8px 8px 9px;
+            }
+
+            .book-card .book-index {
+                font-size: 0.62rem;
+                padding: 2px 8px;
+                margin-bottom: 7px;
             }
 
             .book-card .title {
-                font-size: 0.85rem;
+                font-size: 0.72rem;
             }
 
             .book-card .author {
-                font-size: 0.7rem;
-                margin-bottom: 12px;
+                font-size: 0.62rem;
+                margin-bottom: 7px;
             }
 
             .book-card .book-actions .btn {
-                font-size: 0.6rem;
-                padding: 4px 8px;
-                min-width: 40px;
-                gap: 4px;
+                font-size: 0.56rem;
+                padding: 5px 3px;
+                gap: 3px;
             }
 
+            .book-card .book-actions .btn-download,
             .book-card .book-actions .btn-share {
+                flex-basis: 30px;
                 min-width: 30px;
-                padding: 4px;
+                padding: 6px;
             }
 
             .category-banner .title-group h1 {
@@ -859,193 +924,401 @@
 
                     <!-- 01. ইসলামের ইতিহাস নবীযুগ থেকে বর্তমান -->
                     <div class="book-card">
-                        <span class="book-index">০১</span>
-                        <div class="title">ইসলামের ইতিহাস নবীযুগ থেকে বর্তমান</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> ড. মুহাম্মদ ইব্রাহিম আশ শারিকী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/19_cHk6qVxdCmAqnQJacDA3UtWT8bhXFV/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=19_cHk6qVxdCmAqnQJacDA3UtWT8bhXFV" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/19_cHk6qVxdCmAqnQJacDA3UtWT8bhXFV/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামের ইতিহাস নবীযুগ থেকে বর্তমান পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=19_cHk6qVxdCmAqnQJacDA3UtWT8bhXFV&sz=w400"
+                                alt="ইসলামের ইতিহাস নবীযুগ থেকে বর্তমান বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০১</span>
+                            <div class="title">ইসলামের ইতিহাস নবীযুগ থেকে বর্তমান</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> ড. মুহাম্মদ ইব্রাহিম আশ শারিকী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/19_cHk6qVxdCmAqnQJacDA3UtWT8bhXFV/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=19_cHk6qVxdCmAqnQJacDA3UtWT8bhXFV" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 02. স্বর্ণযুগে মুসলিম বিজ্ঞানীদের আবিষ্কার -->
                     <div class="book-card">
-                        <span class="book-index">০২</span>
-                        <div class="title">স্বর্ণযুগে মুসলিম বিজ্ঞানীদের আবিষ্কার</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> সাহাদাত হোসেন খান</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1Hm5gx9xEmHKF9nvgVGk0HJMx3M-pqaFJ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1Hm5gx9xEmHKF9nvgVGk0HJMx3M-pqaFJ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1Hm5gx9xEmHKF9nvgVGk0HJMx3M-pqaFJ/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="স্বর্ণযুগে মুসলিম বিজ্ঞানীদের আবিষ্কার পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1Hm5gx9xEmHKF9nvgVGk0HJMx3M-pqaFJ&sz=w400"
+                                alt="স্বর্ণযুগে মুসলিম বিজ্ঞানীদের আবিষ্কার বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০২</span>
+                            <div class="title">স্বর্ণযুগে মুসলিম বিজ্ঞানীদের আবিষ্কার</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> সাহাদাত হোসেন খান</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1Hm5gx9xEmHKF9nvgVGk0HJMx3M-pqaFJ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1Hm5gx9xEmHKF9nvgVGk0HJMx3M-pqaFJ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 03. চেপে রাখা ইতিহাস -->
                     <div class="book-card">
-                        <span class="book-index">০৩</span>
-                        <div class="title">চেপে রাখা ইতিহাস</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> গোলাম আহমাদ মোর্তজা</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1HmrKj-7vI_uYMsg0PedI_Cma4JVFBAUC/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1HmrKj-7vI_uYMsg0PedI_Cma4JVFBAUC" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1HmrKj-7vI_uYMsg0PedI_Cma4JVFBAUC/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="চেপে রাখা ইতিহাস পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1HmrKj-7vI_uYMsg0PedI_Cma4JVFBAUC&sz=w400"
+                                alt="চেপে রাখা ইতিহাস বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৩</span>
+                            <div class="title">চেপে রাখা ইতিহাস</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> গোলাম আহমাদ মোর্তজা</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1HmrKj-7vI_uYMsg0PedI_Cma4JVFBAUC/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1HmrKj-7vI_uYMsg0PedI_Cma4JVFBAUC" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 04. ইতিহাসের আয়নায় বর্তমান বিশ্বব্যবস্থা -->
                     <div class="book-card">
-                        <span class="book-index">০৪</span>
-                        <div class="title">ইতিহাসের আয়নায় বর্তমান বিশ্বব্যবস্থা</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> হেদায়াতুল্লাহ মেহমান্দ</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/12TZ9IHZ_Wi8mv7j4JmNgeXtJuVAMzrhT/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=12TZ9IHZ_Wi8mv7j4JmNgeXtJuVAMzrhT" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/12TZ9IHZ_Wi8mv7j4JmNgeXtJuVAMzrhT/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইতিহাসের আয়নায় বর্তমান বিশ্বব্যবস্থা পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=12TZ9IHZ_Wi8mv7j4JmNgeXtJuVAMzrhT&sz=w400"
+                                alt="ইতিহাসের আয়নায় বর্তমান বিশ্বব্যবস্থা বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৪</span>
+                            <div class="title">ইতিহাসের আয়নায় বর্তমান বিশ্বব্যবস্থা</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> হেদায়াতুল্লাহ মেহমান্দ</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/12TZ9IHZ_Wi8mv7j4JmNgeXtJuVAMzrhT/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=12TZ9IHZ_Wi8mv7j4JmNgeXtJuVAMzrhT" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 05. বাংলার মুসলমানদের ইতিহাস -->
                     <div class="book-card">
-                        <span class="book-index">০৫</span>
-                        <div class="title">বাংলার মুসলমানদের ইতিহাস</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> আব্বাস আলী খান</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1_9bhRcdFG3abAFm7aZtnZzlbXtuRC3j_/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1_9bhRcdFG3abAFm7aZtnZzlbXtuRC3j_" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1_9bhRcdFG3abAFm7aZtnZzlbXtuRC3j_/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="বাংলার মুসলমানদের ইতিহাস পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1_9bhRcdFG3abAFm7aZtnZzlbXtuRC3j_&sz=w400"
+                                alt="বাংলার মুসলমানদের ইতিহাস বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৫</span>
+                            <div class="title">বাংলার মুসলমানদের ইতিহাস</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> আব্বাস আলী খান</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1_9bhRcdFG3abAFm7aZtnZzlbXtuRC3j_/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1_9bhRcdFG3abAFm7aZtnZzlbXtuRC3j_" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 06. সেরা মুসলিম বিজ্ঞানী -->
                     <div class="book-card">
-                        <span class="book-index">০৬</span>
-                        <div class="title">সেরা মুসলিম বিজ্ঞানী</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> জিলহজ আলী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1VNQ1RtID2OjXWoOd4y3IuhFfDn-g3HGZ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1VNQ1RtID2OjXWoOd4y3IuhFfDn-g3HGZ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1VNQ1RtID2OjXWoOd4y3IuhFfDn-g3HGZ/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="সেরা মুসলিম বিজ্ঞানী পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1VNQ1RtID2OjXWoOd4y3IuhFfDn-g3HGZ&sz=w400"
+                                alt="সেরা মুসলিম বিজ্ঞানী বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৬</span>
+                            <div class="title">সেরা মুসলিম বিজ্ঞানী</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> জিলহজ আলী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1VNQ1RtID2OjXWoOd4y3IuhFfDn-g3HGZ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1VNQ1RtID2OjXWoOd4y3IuhFfDn-g3HGZ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 07. সাপিয়েন্স মানুষের ইতিহাস -->
                     <div class="book-card">
-                        <span class="book-index">০৭</span>
-                        <div class="title">সাপিয়েন্স মানুষের ইতিহাস</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> নোয়া হারারি</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1UEy_b9pFUnKfRe-sBEnVAAls1V7ACpkK/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1UEy_b9pFUnKfRe-sBEnVAAls1V7ACpkK" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1UEy_b9pFUnKfRe-sBEnVAAls1V7ACpkK/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="সাপিয়েন্স মানুষের ইতিহাস পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1UEy_b9pFUnKfRe-sBEnVAAls1V7ACpkK&sz=w400"
+                                alt="সাপিয়েন্স মানুষের ইতিহাস বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৭</span>
+                            <div class="title">সাপিয়েন্স মানুষের ইতিহাস</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> নোয়া হারারি</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1UEy_b9pFUnKfRe-sBEnVAAls1V7ACpkK/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1UEy_b9pFUnKfRe-sBEnVAAls1V7ACpkK" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 08. হামাস ফিসিস্তিন মুক্তি আন্দোলন ভেতরে ও বাইরে -->
                     <div class="book-card">
-                        <span class="book-index">০৮</span>
-                        <div class="title">হামাস ফিসিস্তিন মুক্তি আন্দোলন ভেতরে ও বাইরে</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> আলী আহমাদ মাবরুর</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/17KkVbJU-rXQefyNnb11VCBtdXkmgnDx0/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=17KkVbJU-rXQefyNnb11VCBtdXkmgnDx0" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/17KkVbJU-rXQefyNnb11VCBtdXkmgnDx0/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="হামাস ফিসিস্তিন মুক্তি আন্দোলন ভেতরে ও বাইরে পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=17KkVbJU-rXQefyNnb11VCBtdXkmgnDx0&sz=w400"
+                                alt="হামাস ফিসিস্তিন মুক্তি আন্দোলন ভেতরে ও বাইরে বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৮</span>
+                            <div class="title">হামাস ফিসিস্তিন মুক্তি আন্দোলন ভেতরে ও বাইরে</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> আলী আহমাদ মাবরুর</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/17KkVbJU-rXQefyNnb11VCBtdXkmgnDx0/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=17KkVbJU-rXQefyNnb11VCBtdXkmgnDx0" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 09. ফিলিস্তিন এর স্মৃতি -->
                     <div class="book-card">
-                        <span class="book-index">০৯</span>
-                        <div class="title">ফিলিস্তিন এর স্মৃতি</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> আব্দুল্লাহ আযযাম</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1LM5OyiHCB46dx8_-qXGtggHre5GYVL1R/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1LM5OyiHCB46dx8_-qXGtggHre5GYVL1R" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1LM5OyiHCB46dx8_-qXGtggHre5GYVL1R/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ফিলিস্তিন এর স্মৃতি পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1LM5OyiHCB46dx8_-qXGtggHre5GYVL1R&sz=w400"
+                                alt="ফিলিস্তিন এর স্মৃতি বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৯</span>
+                            <div class="title">ফিলিস্তিন এর স্মৃতি</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> আব্দুল্লাহ আযযাম</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1LM5OyiHCB46dx8_-qXGtggHre5GYVL1R/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1LM5OyiHCB46dx8_-qXGtggHre5GYVL1R" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 10. আল আকসা মসজিদের ইতিকথা -->
                     <div class="book-card">
-                        <span class="book-index">১০</span>
-                        <div class="title">আল আকসা মসজিদের ইতিকথা</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> সিরাজুল ইসলাম</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1YbdirxtEIGQyCRRLCZMf9FUSuWbkuXmX/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1YbdirxtEIGQyCRRLCZMf9FUSuWbkuXmX" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1YbdirxtEIGQyCRRLCZMf9FUSuWbkuXmX/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="আল আকসা মসজিদের ইতিকথা পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1YbdirxtEIGQyCRRLCZMf9FUSuWbkuXmX&sz=w400"
+                                alt="আল আকসা মসজিদের ইতিকথা বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১০</span>
+                            <div class="title">আল আকসা মসজিদের ইতিকথা</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> সিরাজুল ইসলাম</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1YbdirxtEIGQyCRRLCZMf9FUSuWbkuXmX/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1YbdirxtEIGQyCRRLCZMf9FUSuWbkuXmX" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 11. লস্ট অব ইসলামিক হিস্ট্রি -->
                     <div class="book-card">
-                        <span class="book-index">১১</span>
-                        <div class="title">লস্ট অব ইসলামিক হিস্ট্রি</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> আলী আহমাদ মাবরুর</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/149PjN8vHdbhH75XGHanYf55GfPn1Tz8D/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=149PjN8vHdbhH75XGHanYf55GfPn1Tz8D" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/149PjN8vHdbhH75XGHanYf55GfPn1Tz8D/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="লস্ট অব ইসলামিক হিস্ট্রি পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=149PjN8vHdbhH75XGHanYf55GfPn1Tz8D&sz=w400"
+                                alt="লস্ট অব ইসলামিক হিস্ট্রি বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১১</span>
+                            <div class="title">লস্ট অব ইসলামিক হিস্ট্রি</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> আলী আহমাদ মাবরুর</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/149PjN8vHdbhH75XGHanYf55GfPn1Tz8D/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=149PjN8vHdbhH75XGHanYf55GfPn1Tz8D" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 12. লস্ট ইসলামিক হিস্ট্রি -->
                     <div class="book-card">
-                        <span class="book-index">১২</span>
-                        <div class="title">লস্ট ইসলামিক হিস্ট্রি</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> আলী আহমদ আবরুব</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1T92ydW5_croqSJ7qMMPKWnq2Bj410XaY/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1T92ydW5_croqSJ7qMMPKWnq2Bj410XaY" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1T92ydW5_croqSJ7qMMPKWnq2Bj410XaY/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="লস্ট ইসলামিক হিস্ট্রি পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1T92ydW5_croqSJ7qMMPKWnq2Bj410XaY&sz=w400"
+                                alt="লস্ট ইসলামিক হিস্ট্রি বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১২</span>
+                            <div class="title">লস্ট ইসলামিক হিস্ট্রি</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> আলী আহমদ আবরুব</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1T92ydW5_croqSJ7qMMPKWnq2Bj410XaY/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1T92ydW5_croqSJ7qMMPKWnq2Bj410XaY" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 13. আমাদের সোনালী অতীত -->
                     <div class="book-card">
-                        <span class="book-index">১৩</span>
-                        <div class="title">আমাদের সোনালী অতীত</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> ড. মুহাম্মদ ইবনে আবদুর রহমান আরিফী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1ccUz1066gVIROJ2AzwwoYzTbXC_qeUZG/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1ccUz1066gVIROJ2AzwwoYzTbXC_qeUZG" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1ccUz1066gVIROJ2AzwwoYzTbXC_qeUZG/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="আমাদের সোনালী অতীত পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1ccUz1066gVIROJ2AzwwoYzTbXC_qeUZG&sz=w400"
+                                alt="আমাদের সোনালী অতীত বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৩</span>
+                            <div class="title">আমাদের সোনালী অতীত</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> ড. মুহাম্মদ ইবনে আবদুর রহমান আরিফী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1ccUz1066gVIROJ2AzwwoYzTbXC_qeUZG/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1ccUz1066gVIROJ2AzwwoYzTbXC_qeUZG" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 14. একটুখানি সোনালি অতীত -->
                     <div class="book-card">
-                        <span class="book-index">১৪</span>
-                        <div class="title">একটুখানি সোনালি অতীত</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> সায়্যিদ আবুল হাসান আলী নদভী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1mZMb_cq_RT2SPUXlrS_pGOzUatRvUAZG/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1mZMb_cq_RT2SPUXlrS_pGOzUatRvUAZG" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1mZMb_cq_RT2SPUXlrS_pGOzUatRvUAZG/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="একটুখানি সোনালি অতীত পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1mZMb_cq_RT2SPUXlrS_pGOzUatRvUAZG&sz=w400"
+                                alt="একটুখানি সোনালি অতীত বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৪</span>
+                            <div class="title">একটুখানি সোনালি অতীত</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> সায়্যিদ আবুল হাসান আলী নদভী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1mZMb_cq_RT2SPUXlrS_pGOzUatRvUAZG/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1mZMb_cq_RT2SPUXlrS_pGOzUatRvUAZG" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 15. বিশ্বাস্বের অভিযাত্রা -->
                     <div class="book-card">
-                        <span class="book-index">১৫</span>
-                        <div class="title">বিশ্বাস্বের অভিযাত্রা</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> ড. ইয়াদ কুনাইবী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1Ns9OGIpdUQhjwW4sh-HElY-PKPoCPp4i/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1Ns9OGIpdUQhjwW4sh-HElY-PKPoCPp4i" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1Ns9OGIpdUQhjwW4sh-HElY-PKPoCPp4i/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="বিশ্বাস্বের অভিযাত্রা পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1Ns9OGIpdUQhjwW4sh-HElY-PKPoCPp4i&sz=w400"
+                                alt="বিশ্বাস্বের অভিযাত্রা বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৫</span>
+                            <div class="title">বিশ্বাস্বের অভিযাত্রা</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> ড. ইয়াদ কুনাইবী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1Ns9OGIpdUQhjwW4sh-HElY-PKPoCPp4i/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1Ns9OGIpdUQhjwW4sh-HElY-PKPoCPp4i" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 16. অবাধ্যতার ইতিহাস -->
                     <div class="book-card">
-                        <span class="book-index">১৬</span>
-                        <div class="title">অবাধ্যতার ইতিহাস</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> ডা. শামসুল আরেফীন</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1TKoOUQIKXgCrFdo7X0dHYEZvhipnOJbk/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1TKoOUQIKXgCrFdo7X0dHYEZvhipnOJbk" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1TKoOUQIKXgCrFdo7X0dHYEZvhipnOJbk/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="অবাধ্যতার ইতিহাস পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1TKoOUQIKXgCrFdo7X0dHYEZvhipnOJbk&sz=w400"
+                                alt="অবাধ্যতার ইতিহাস বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৬</span>
+                            <div class="title">অবাধ্যতার ইতিহাস</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> ডা. শামসুল আরেফীন</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1TKoOUQIKXgCrFdo7X0dHYEZvhipnOJbk/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1TKoOUQIKXgCrFdo7X0dHYEZvhipnOJbk" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 

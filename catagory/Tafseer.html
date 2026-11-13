@@ -372,7 +372,7 @@
         }
 
         /* ============================================================
-                   BOOKS GRID (no cover images — clean text cards)
+                   BOOKS GRID (with book cover images)
                    ============================================================ */
         .category-books {
             padding: 40px 0 80px;
@@ -381,19 +381,63 @@
 
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 14px;
         }
 
         .book-card {
             background: var(--white);
             border-radius: var(--radius);
-            padding: 24px 26px 26px;
+            overflow: hidden;
             box-shadow: var(--shadow-sm);
             transition: var(--transition);
             border: 1px solid var(--teal-50);
             display: flex;
             flex-direction: column;
+            min-width: 0;
+        }
+
+        .book-cover-link {
+            position: relative;
+            display: block;
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+            background: linear-gradient(145deg, var(--teal-100), var(--cream-dark));
+            border-bottom: 1px solid var(--teal-100);
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.4s ease;
+        }
+
+        .book-card:hover .book-cover {
+            transform: scale(1.04);
+        }
+
+        .cover-fallback-icon {
+            display: none;
+            position: absolute;
+            inset: 0;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--teal-500);
+        }
+
+        .book-cover-link.cover-fallback .cover-fallback-icon {
+            display: flex;
+        }
+
+        .book-content {
+            padding: 10px 11px 11px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
 
         .book-card:hover {
@@ -408,25 +452,33 @@
             font-weight: 600;
             color: var(--teal-400);
             background: var(--teal-50);
-            padding: 2px 12px;
+            padding: 1px 8px;
             border-radius: 50px;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             align-self: flex-start;
             letter-spacing: 0.5px;
         }
 
         .book-card .title {
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 0.88rem;
             color: var(--gray-900);
             margin-bottom: 4px;
-            line-height: 1.4;
+            line-height: 1.35;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .book-card .author {
-            font-size: 0.9rem;
+            font-size: 0.72rem;
             color: var(--gray-500);
-            margin-bottom: 16px;
+            margin-bottom: 9px;
+            line-height: 1.35;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .book-card .author i {
@@ -436,8 +488,8 @@
 
         .book-card .book-actions {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 6px;
+            flex-wrap: nowrap;
             margin-top: auto;
             align-items: center;
         }
@@ -445,9 +497,9 @@
         .book-card .book-actions .btn {
             flex: 1;
             justify-content: center;
-            padding: 8px 14px;
-            font-size: 0.82rem;
-            min-width: 70px;
+            padding: 7px 8px;
+            font-size: 0.68rem;
+            min-width: 34px;
         }
 
         .book-card .book-actions .btn-read {
@@ -692,30 +744,36 @@
             }
 
             .books-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 12px;
             }
 
-            .book-card {
-                padding: 18px 16px 20px;
+            .book-content {
+                padding: 9px 9px 10px;
             }
 
             .book-card .title {
-                font-size: 0.95rem;
+                font-size: 0.82rem;
             }
 
             .book-card .author {
-                font-size: 0.8rem;
+                font-size: 0.68rem;
+                margin-bottom: 8px;
+            }
+
+            .book-card .book-actions {
+                gap: 6px;
             }
 
             .book-card .book-actions .btn {
-                font-size: 0.7rem;
-                padding: 6px 10px;
-                min-width: 50px;
+                font-size: 0.62rem;
+                padding: 6px 4px;
             }
 
+            .book-card .book-actions .btn-download,
             .book-card .book-actions .btn-share {
-                min-width: 36px;
+                flex-basis: 30px;
+                min-width: 30px;
                 padding: 6px;
             }
 
@@ -736,33 +794,40 @@
             }
 
             .books-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 9px;
             }
 
-            .book-card {
-                padding: 14px 12px 16px;
+            .book-content {
+                padding: 8px 8px 9px;
+            }
+
+            .book-card .book-index {
+                font-size: 0.62rem;
+                padding: 2px 8px;
+                margin-bottom: 7px;
             }
 
             .book-card .title {
-                font-size: 0.85rem;
+                font-size: 0.72rem;
             }
 
             .book-card .author {
-                font-size: 0.7rem;
-                margin-bottom: 12px;
+                font-size: 0.62rem;
+                margin-bottom: 7px;
             }
 
             .book-card .book-actions .btn {
-                font-size: 0.6rem;
-                padding: 4px 8px;
-                min-width: 40px;
-                gap: 4px;
+                font-size: 0.56rem;
+                padding: 5px 3px;
+                gap: 3px;
             }
 
+            .book-card .book-actions .btn-download,
             .book-card .book-actions .btn-share {
+                flex-basis: 30px;
                 min-width: 30px;
-                padding: 4px;
+                padding: 6px;
             }
 
             .category-banner .title-group h1 {
@@ -857,299 +922,650 @@
                 <div class="books-grid">
 
 <div class="book-card">
-    <span class="book-index">০১</span>
-    <div class="title">আল কুরআনুল করীম</div>
-    <div class="author"><i class="fas fa-user-pen"></i> ইসলামিক ফাউন্ডেশন</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1UvQOpYgXsL-j6hNbqmOpMja_2VJG79dW/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1UvQOpYgXsL-j6hNbqmOpMja_2VJG79dW" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1UvQOpYgXsL-j6hNbqmOpMja_2VJG79dW/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="আল কুরআনুল করীম পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1UvQOpYgXsL-j6hNbqmOpMja_2VJG79dW&sz=w400"
+            alt="আল কুরআনুল করীম বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">০১</span>
+        <div class="title">আল কুরআনুল করীম</div>
+        <div class="author"><i class="fas fa-user-pen"></i> ইসলামিক ফাউন্ডেশন</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1UvQOpYgXsL-j6hNbqmOpMja_2VJG79dW/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1UvQOpYgXsL-j6hNbqmOpMja_2VJG79dW" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">০২</span>
-    <div class="title">তাইসিরুল কুরআন</div>
-    <div class="author"><i class="fas fa-user-pen"></i> অধ্যাপক মোজাম্মেল হক</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/12wuzOF3vj68gYCMelv9tq4eR1munDgcx/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=12wuzOF3vj68gYCMelv9tq4eR1munDgcx" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/12wuzOF3vj68gYCMelv9tq4eR1munDgcx/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="তাইসিরুল কুরআন পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=12wuzOF3vj68gYCMelv9tq4eR1munDgcx&sz=w400"
+            alt="তাইসিরুল কুরআন বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">০২</span>
+        <div class="title">তাইসিরুল কুরআন</div>
+        <div class="author"><i class="fas fa-user-pen"></i> অধ্যাপক মোজাম্মেল হক</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/12wuzOF3vj68gYCMelv9tq4eR1munDgcx/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=12wuzOF3vj68gYCMelv9tq4eR1munDgcx" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">০৩</span>
-    <div class="title">তারাবীহর সালাতে কুরআনের বার্তা</div>
-    <div class="author"><i class="fas fa-user-pen"></i> শায়খ আহমদুল্লাহ</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1OtApRizBXNvGKyPNIp3Cft_DbA-0jWbe/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1OtApRizBXNvGKyPNIp3Cft_DbA-0jWbe" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1OtApRizBXNvGKyPNIp3Cft_DbA-0jWbe/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="তারাবীহর সালাতে কুরআনের বার্তা পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1OtApRizBXNvGKyPNIp3Cft_DbA-0jWbe&sz=w400"
+            alt="তারাবীহর সালাতে কুরআনের বার্তা বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">০৩</span>
+        <div class="title">তারাবীহর সালাতে কুরআনের বার্তা</div>
+        <div class="author"><i class="fas fa-user-pen"></i> শায়খ আহমদুল্লাহ</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1OtApRizBXNvGKyPNIp3Cft_DbA-0jWbe/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1OtApRizBXNvGKyPNIp3Cft_DbA-0jWbe" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">০৪</span>
-    <div class="title">কুরআনের শব্দাবলি</div>
-    <div class="author"><i class="fas fa-user-pen"></i> জোবায়ের আল মাহমুদ</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1LKRp5nlMhIX15ZNimyd6j0Y0hJbm-plk/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1LKRp5nlMhIX15ZNimyd6j0Y0hJbm-plk" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1LKRp5nlMhIX15ZNimyd6j0Y0hJbm-plk/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="কুরআনের শব্দাবলি পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1LKRp5nlMhIX15ZNimyd6j0Y0hJbm-plk&sz=w400"
+            alt="কুরআনের শব্দাবলি বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">০৪</span>
+        <div class="title">কুরআনের শব্দাবলি</div>
+        <div class="author"><i class="fas fa-user-pen"></i> জোবায়ের আল মাহমুদ</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1LKRp5nlMhIX15ZNimyd6j0Y0hJbm-plk/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1LKRp5nlMhIX15ZNimyd6j0Y0hJbm-plk" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">০৫</span>
-    <div class="title">তাদাব্বুরে কুরআন</div>
-    <div class="author"><i class="fas fa-user-pen"></i> আদিল মুহাম্মদ খলিল</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1IVGsGckBTnxiQS41Q13QvP0k7jflYiT3/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1IVGsGckBTnxiQS41Q13QvP0k7jflYiT3" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1IVGsGckBTnxiQS41Q13QvP0k7jflYiT3/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="তাদাব্বুরে কুরআন পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1IVGsGckBTnxiQS41Q13QvP0k7jflYiT3&sz=w400"
+            alt="তাদাব্বুরে কুরআন বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">০৫</span>
+        <div class="title">তাদাব্বুরে কুরআন</div>
+        <div class="author"><i class="fas fa-user-pen"></i> আদিল মুহাম্মদ খলিল</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1IVGsGckBTnxiQS41Q13QvP0k7jflYiT3/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1IVGsGckBTnxiQS41Q13QvP0k7jflYiT3" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">০৬</span>
-    <div class="title">গাণিতিক রহস্যময় কুরআন</div>
-    <div class="author"><i class="fas fa-user-pen"></i> আহমেদ দিদাত</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1E6BI6WobbE056dskINnRsGKqneWMb8b0/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1E6BI6WobbE056dskINnRsGKqneWMb8b0" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1E6BI6WobbE056dskINnRsGKqneWMb8b0/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="গাণিতিক রহস্যময় কুরআন পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1E6BI6WobbE056dskINnRsGKqneWMb8b0&sz=w400"
+            alt="গাণিতিক রহস্যময় কুরআন বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">০৬</span>
+        <div class="title">গাণিতিক রহস্যময় কুরআন</div>
+        <div class="author"><i class="fas fa-user-pen"></i> আহমেদ দিদাত</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1E6BI6WobbE056dskINnRsGKqneWMb8b0/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1E6BI6WobbE056dskINnRsGKqneWMb8b0" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">০৭</span>
-    <div class="title">কুরআনের কাব্যানুবাদ</div>
-    <div class="author"><i class="fas fa-user-pen"></i> মুহিব খান</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1FmjlUA5uoXYleUJgkHkTMABz-WxfDn92/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1FmjlUA5uoXYleUJgkHkTMABz-WxfDn92" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1FmjlUA5uoXYleUJgkHkTMABz-WxfDn92/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="কুরআনের কাব্যানুবাদ পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1FmjlUA5uoXYleUJgkHkTMABz-WxfDn92&sz=w400"
+            alt="কুরআনের কাব্যানুবাদ বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">০৭</span>
+        <div class="title">কুরআনের কাব্যানুবাদ</div>
+        <div class="author"><i class="fas fa-user-pen"></i> মুহিব খান</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1FmjlUA5uoXYleUJgkHkTMABz-WxfDn92/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1FmjlUA5uoXYleUJgkHkTMABz-WxfDn92" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">০৮</span>
-    <div class="title">কুরআনুল কারীম</div>
-    <div class="author"><i class="fas fa-user-pen"></i> ড. যাকারীয়া</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1IoH2GahOgOzEL0Dr0mYEStzq4iEDOfRV/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1IoH2GahOgOzEL0Dr0mYEStzq4iEDOfRV" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1IoH2GahOgOzEL0Dr0mYEStzq4iEDOfRV/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="কুরআনুল কারীম পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1IoH2GahOgOzEL0Dr0mYEStzq4iEDOfRV&sz=w400"
+            alt="কুরআনুল কারীম বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">০৮</span>
+        <div class="title">কুরআনুল কারীম</div>
+        <div class="author"><i class="fas fa-user-pen"></i> ড. যাকারীয়া</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1IoH2GahOgOzEL0Dr0mYEStzq4iEDOfRV/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1IoH2GahOgOzEL0Dr0mYEStzq4iEDOfRV" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">০৯</span>
-    <div class="title">হে বোন কুরআন তোমাকে যা বলেছে</div>
-    <div class="author"><i class="fas fa-user-pen"></i> ফারজানা আফরিন</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/10vA1YAOBnGeBcqQDC0HCbiw13RtYt1tA/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=10vA1YAOBnGeBcqQDC0HCbiw13RtYt1tA" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/10vA1YAOBnGeBcqQDC0HCbiw13RtYt1tA/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="হে বোন কুরআন তোমাকে যা বলেছে পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=10vA1YAOBnGeBcqQDC0HCbiw13RtYt1tA&sz=w400"
+            alt="হে বোন কুরআন তোমাকে যা বলেছে বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">০৯</span>
+        <div class="title">হে বোন কুরআন তোমাকে যা বলেছে</div>
+        <div class="author"><i class="fas fa-user-pen"></i> ফারজানা আফরিন</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/10vA1YAOBnGeBcqQDC0HCbiw13RtYt1tA/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=10vA1YAOBnGeBcqQDC0HCbiw13RtYt1tA" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">১০</span>
-    <div class="title">কুরআন ও সুন্নাহর আলোকে রমাদান</div>
-    <div class="author"><i class="fas fa-user-pen"></i> ড. মোহাম্মদ মানজুরে ইলাহী</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1WS9nzU3ZYPL_MVvCLekDuG5yEMS9SNpu/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1WS9nzU3ZYPL_MVvCLekDuG5yEMS9SNpu" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1WS9nzU3ZYPL_MVvCLekDuG5yEMS9SNpu/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="কুরআন ও সুন্নাহর আলোকে রমাদান পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1WS9nzU3ZYPL_MVvCLekDuG5yEMS9SNpu&sz=w400"
+            alt="কুরআন ও সুন্নাহর আলোকে রমাদান বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">১০</span>
+        <div class="title">কুরআন ও সুন্নাহর আলোকে রমাদান</div>
+        <div class="author"><i class="fas fa-user-pen"></i> ড. মোহাম্মদ মানজুরে ইলাহী</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1WS9nzU3ZYPL_MVvCLekDuG5yEMS9SNpu/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1WS9nzU3ZYPL_MVvCLekDuG5yEMS9SNpu" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">১১</span>
-    <div class="title">শিশু ও বয়স্কদের কুরআন শিক্ষার সহজ পদ্ধতি</div>
-    <div class="author"><i class="fas fa-user-pen"></i> সাইফুদ্দীন বেলাল</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1bhBC5id3qpX_7m0USqfs5Q9QzEu2-OHx/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1bhBC5id3qpX_7m0USqfs5Q9QzEu2-OHx" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1bhBC5id3qpX_7m0USqfs5Q9QzEu2-OHx/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="শিশু ও বয়স্কদের কুরআন শিক্ষার সহজ পদ্ধতি পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1bhBC5id3qpX_7m0USqfs5Q9QzEu2-OHx&sz=w400"
+            alt="শিশু ও বয়স্কদের কুরআন শিক্ষার সহজ পদ্ধতি বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">১১</span>
+        <div class="title">শিশু ও বয়স্কদের কুরআন শিক্ষার সহজ পদ্ধতি</div>
+        <div class="author"><i class="fas fa-user-pen"></i> সাইফুদ্দীন বেলাল</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1bhBC5id3qpX_7m0USqfs5Q9QzEu2-OHx/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1bhBC5id3qpX_7m0USqfs5Q9QzEu2-OHx" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">১২</span>
-    <div class="title">শিক্ষক ছাড়া কুরআন শিখুন</div>
-    <div class="author"><i class="fas fa-user-pen"></i> সাইফুদ্দীন বেলাল</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1bPGtxymAsEfwLR440T-BwWIlCht5uY74/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1bPGtxymAsEfwLR440T-BwWIlCht5uY74" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1bPGtxymAsEfwLR440T-BwWIlCht5uY74/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="শিক্ষক ছাড়া কুরআন শিখুন পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1bPGtxymAsEfwLR440T-BwWIlCht5uY74&sz=w400"
+            alt="শিক্ষক ছাড়া কুরআন শিখুন বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">১২</span>
+        <div class="title">শিক্ষক ছাড়া কুরআন শিখুন</div>
+        <div class="author"><i class="fas fa-user-pen"></i> সাইফুদ্দীন বেলাল</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1bPGtxymAsEfwLR440T-BwWIlCht5uY74/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1bPGtxymAsEfwLR440T-BwWIlCht5uY74" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">১৩</span>
-    <div class="title">সূরা কাহাফ এবং বর্তমান বিশ্ব</div>
-    <div class="author"><i class="fas fa-user-pen"></i> ইমরান নযর হোসেন</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1Y0XGMLFSHhdn0zYC1MiDYn8V3weGZVCp/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1Y0XGMLFSHhdn0zYC1MiDYn8V3weGZVCp" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1Y0XGMLFSHhdn0zYC1MiDYn8V3weGZVCp/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="সূরা কাহাফ এবং বর্তমান বিশ্ব পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1Y0XGMLFSHhdn0zYC1MiDYn8V3weGZVCp&sz=w400"
+            alt="সূরা কাহাফ এবং বর্তমান বিশ্ব বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">১৩</span>
+        <div class="title">সূরা কাহাফ এবং বর্তমান বিশ্ব</div>
+        <div class="author"><i class="fas fa-user-pen"></i> ইমরান নযর হোসেন</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1Y0XGMLFSHhdn0zYC1MiDYn8V3weGZVCp/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1Y0XGMLFSHhdn0zYC1MiDYn8V3weGZVCp" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">১৪</span>
-    <div class="title">কুরআনে কিয়ামত ও শেষ বিচার এবং জান্নাত ও জাহান্নামের চিত্র</div>
-    <div class="author"><i class="fas fa-user-pen"></i> মুহাম্মদ শামসুল</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1WRg96sMVEZP_0fR5CpQHqDKHkR2Ax08Y/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1WRg96sMVEZP_0fR5CpQHqDKHkR2Ax08Y" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1WRg96sMVEZP_0fR5CpQHqDKHkR2Ax08Y/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="কুরআনে কিয়ামত ও শেষ বিচার এবং জান্নাত ও জাহান্নামের চিত্র পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1WRg96sMVEZP_0fR5CpQHqDKHkR2Ax08Y&sz=w400"
+            alt="কুরআনে কিয়ামত ও শেষ বিচার এবং জান্নাত ও জাহান্নামের চিত্র বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">১৪</span>
+        <div class="title">কুরআনে কিয়ামত ও শেষ বিচার এবং জান্নাত ও জাহান্নামের চিত্র</div>
+        <div class="author"><i class="fas fa-user-pen"></i> মুহাম্মদ শামসুল</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1WRg96sMVEZP_0fR5CpQHqDKHkR2Ax08Y/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1WRg96sMVEZP_0fR5CpQHqDKHkR2Ax08Y" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">১৫</span>
-    <div class="title">কুরআন ও সুন্নায় সুদ নিষিদ্ধকরণ</div>
-    <div class="author"><i class="fas fa-user-pen"></i> ইমরান নযর হোসেন</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1WQ8jUBiGkjGymCr1Vg8iJqHbPnSmHlNJ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1WQ8jUBiGkjGymCr1Vg8iJqHbPnSmHlNJ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1WQ8jUBiGkjGymCr1Vg8iJqHbPnSmHlNJ/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="কুরআন ও সুন্নায় সুদ নিষিদ্ধকরণ পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1WQ8jUBiGkjGymCr1Vg8iJqHbPnSmHlNJ&sz=w400"
+            alt="কুরআন ও সুন্নায় সুদ নিষিদ্ধকরণ বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">১৫</span>
+        <div class="title">কুরআন ও সুন্নায় সুদ নিষিদ্ধকরণ</div>
+        <div class="author"><i class="fas fa-user-pen"></i> ইমরান নযর হোসেন</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1WQ8jUBiGkjGymCr1Vg8iJqHbPnSmHlNJ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1WQ8jUBiGkjGymCr1Vg8iJqHbPnSmHlNJ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">১৬</span>
-    <div class="title">তাফহীমুল কুরআন</div>
-    <div class="author"><i class="fas fa-user-pen"></i> মওদুদী</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1BScszvS2-dbjPStIOW0j6l2DnID2-Ziy/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1BScszvS2-dbjPStIOW0j6l2DnID2-Ziy" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1BScszvS2-dbjPStIOW0j6l2DnID2-Ziy/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="তাফহীমুল কুরআন পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1BScszvS2-dbjPStIOW0j6l2DnID2-Ziy&sz=w400"
+            alt="তাফহীমুল কুরআন বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">১৬</span>
+        <div class="title">তাফহীমুল কুরআন</div>
+        <div class="author"><i class="fas fa-user-pen"></i> মওদুদী</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1BScszvS2-dbjPStIOW0j6l2DnID2-Ziy/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1BScszvS2-dbjPStIOW0j6l2DnID2-Ziy" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">১৭</span>
-    <div class="title">কুরআন ও হাদীসের আলোকে স্রষ্টা ও সৃষ্টিতত্ব</div>
-    <div class="author"><i class="fas fa-user-pen"></i> আব্দুল হক</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1lb10cTO1WbaLYvSOOSAa4e83xFNcZRBp/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1lb10cTO1WbaLYvSOOSAa4e83xFNcZRBp" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1lb10cTO1WbaLYvSOOSAa4e83xFNcZRBp/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="কুরআন ও হাদীসের আলোকে স্রষ্টা ও সৃষ্টিতত্ব পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1lb10cTO1WbaLYvSOOSAa4e83xFNcZRBp&sz=w400"
+            alt="কুরআন ও হাদীসের আলোকে স্রষ্টা ও সৃষ্টিতত্ব বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">১৭</span>
+        <div class="title">কুরআন ও হাদীসের আলোকে স্রষ্টা ও সৃষ্টিতত্ব</div>
+        <div class="author"><i class="fas fa-user-pen"></i> আব্দুল হক</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1lb10cTO1WbaLYvSOOSAa4e83xFNcZRBp/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1lb10cTO1WbaLYvSOOSAa4e83xFNcZRBp" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">১৮</span>
-    <div class="title">কুরআনী ক্বায়দ্বা</div>
-    <div class="author"><i class="fas fa-user-pen"></i> ওসমান গণি</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1xFCLriPej3w3KLVCvQjo8tucftRmAUko/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1xFCLriPej3w3KLVCvQjo8tucftRmAUko" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1xFCLriPej3w3KLVCvQjo8tucftRmAUko/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="কুরআনী ক্বায়দ্বা পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1xFCLriPej3w3KLVCvQjo8tucftRmAUko&sz=w400"
+            alt="কুরআনী ক্বায়দ্বা বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">১৮</span>
+        <div class="title">কুরআনী ক্বায়দ্বা</div>
+        <div class="author"><i class="fas fa-user-pen"></i> ওসমান গণি</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1xFCLriPej3w3KLVCvQjo8tucftRmAUko/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1xFCLriPej3w3KLVCvQjo8tucftRmAUko" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">১৯</span>
-    <div class="title">আল কুরআনের শব্দসমুহ</div>
-    <div class="author"><i class="fas fa-user-pen"></i> ইমরান হেলাল</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1wIrRx1DUD-ujEZyP6Xg7jbwf51dqBe3a/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1wIrRx1DUD-ujEZyP6Xg7jbwf51dqBe3a" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1wIrRx1DUD-ujEZyP6Xg7jbwf51dqBe3a/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="আল কুরআনের শব্দসমুহ পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1wIrRx1DUD-ujEZyP6Xg7jbwf51dqBe3a&sz=w400"
+            alt="আল কুরআনের শব্দসমুহ বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">১৯</span>
+        <div class="title">আল কুরআনের শব্দসমুহ</div>
+        <div class="author"><i class="fas fa-user-pen"></i> ইমরান হেলাল</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1wIrRx1DUD-ujEZyP6Xg7jbwf51dqBe3a/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1wIrRx1DUD-ujEZyP6Xg7jbwf51dqBe3a" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">২০</span>
-    <div class="title">আল কুরআনের ভাষা</div>
-    <div class="author"><i class="fas fa-user-pen"></i> নাহিদ হাসান</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1nBHSqSW2zyjpTdaFCpM1s0QHrNUCE5W-" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1nBHSqSW2zyjpTdaFCpM1s0QHrNUCE5W-" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1nBHSqSW2zyjpTdaFCpM1s0QHrNUCE5W-/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="আল কুরআনের ভাষা পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1nBHSqSW2zyjpTdaFCpM1s0QHrNUCE5W-&sz=w400"
+            alt="আল কুরআনের ভাষা বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">২০</span>
+        <div class="title">আল কুরআনের ভাষা</div>
+        <div class="author"><i class="fas fa-user-pen"></i> নাহিদ হাসান</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1nBHSqSW2zyjpTdaFCpM1s0QHrNUCE5W-" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1nBHSqSW2zyjpTdaFCpM1s0QHrNUCE5W-" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">২১</span>
-    <div class="title">কুরআনুল কারীমে নবী চরিত্র</div>
-    <div class="author"><i class="fas fa-user-pen"></i> ড.তাহের</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1wWam49jpANA-8O8hkIZWLPxOJQa6p0wZ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1wWam49jpANA-8O8hkIZWLPxOJQa6p0wZ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1wWam49jpANA-8O8hkIZWLPxOJQa6p0wZ/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="কুরআনুল কারীমে নবী চরিত্র পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1wWam49jpANA-8O8hkIZWLPxOJQa6p0wZ&sz=w400"
+            alt="কুরআনুল কারীমে নবী চরিত্র বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">২১</span>
+        <div class="title">কুরআনুল কারীমে নবী চরিত্র</div>
+        <div class="author"><i class="fas fa-user-pen"></i> ড.তাহের</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1wWam49jpANA-8O8hkIZWLPxOJQa6p0wZ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1wWam49jpANA-8O8hkIZWLPxOJQa6p0wZ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">২২</span>
-    <div class="title">কুরআন পড়ি কুরআন বুঝি আল কুরআনের সমাজ গড়ি</div>
-    <div class="author"><i class="fas fa-user-pen"></i> মুহাম্মদ ইকবাল কিলানী</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1REukBaVgUTxAIcGowGIVCEAdVHeKQ4xl/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1REukBaVgUTxAIcGowGIVCEAdVHeKQ4xl" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1REukBaVgUTxAIcGowGIVCEAdVHeKQ4xl/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="কুরআন পড়ি কুরআন বুঝি আল কুরআনের সমাজ গড়ি পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1REukBaVgUTxAIcGowGIVCEAdVHeKQ4xl&sz=w400"
+            alt="কুরআন পড়ি কুরআন বুঝি আল কুরআনের সমাজ গড়ি বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">২২</span>
+        <div class="title">কুরআন পড়ি কুরআন বুঝি আল কুরআনের সমাজ গড়ি</div>
+        <div class="author"><i class="fas fa-user-pen"></i> মুহাম্মদ ইকবাল কিলানী</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1REukBaVgUTxAIcGowGIVCEAdVHeKQ4xl/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1REukBaVgUTxAIcGowGIVCEAdVHeKQ4xl" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">২৩</span>
-    <div class="title">আল কুরআন জিজ্ঞাসা ও জবাব</div>
-    <div class="author"><i class="fas fa-user-pen"></i> আব্দুল ওয়াহিদ</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1PpM44J2O9tCbhas19RTtglBH69_PAJIu/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1PpM44J2O9tCbhas19RTtglBH69_PAJIu" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1PpM44J2O9tCbhas19RTtglBH69_PAJIu/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="আল কুরআন জিজ্ঞাসা ও জবাব পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1PpM44J2O9tCbhas19RTtglBH69_PAJIu&sz=w400"
+            alt="আল কুরআন জিজ্ঞাসা ও জবাব বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">২৩</span>
+        <div class="title">আল কুরআন জিজ্ঞাসা ও জবাব</div>
+        <div class="author"><i class="fas fa-user-pen"></i> আব্দুল ওয়াহিদ</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1PpM44J2O9tCbhas19RTtglBH69_PAJIu/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1PpM44J2O9tCbhas19RTtglBH69_PAJIu" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">২৪</span>
-    <div class="title">আল কুরআনের শিক্ষা</div>
-    <div class="author"><i class="fas fa-user-pen"></i> মুহাম্মদ ইকবাল কিলানী</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1Pxwg88FDh_d620BMCEbS2SlILjunABOq/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1Pxwg88FDh_d620BMCEbS2SlILjunABOq" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1Pxwg88FDh_d620BMCEbS2SlILjunABOq/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="আল কুরআনের শিক্ষা পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1Pxwg88FDh_d620BMCEbS2SlILjunABOq&sz=w400"
+            alt="আল কুরআনের শিক্ষা বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">২৪</span>
+        <div class="title">আল কুরআনের শিক্ষা</div>
+        <div class="author"><i class="fas fa-user-pen"></i> মুহাম্মদ ইকবাল কিলানী</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1Pxwg88FDh_d620BMCEbS2SlILjunABOq/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1Pxwg88FDh_d620BMCEbS2SlILjunABOq" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">২৫</span>
-    <div class="title">কুরআন ও সহীহ হাদিসের আলোকে ব্যভিচার ও সমকাম</div>
-    <div class="author"><i class="fas fa-user-pen"></i> মুস্তাফিজুর রহমান</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1ZNXxz296OOep-Hl8CwaWrkmj-MebcGxm/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1ZNXxz296OOep-Hl8CwaWrkmj-MebcGxm" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1ZNXxz296OOep-Hl8CwaWrkmj-MebcGxm/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="কুরআন ও সহীহ হাদিসের আলোকে ব্যভিচার ও সমকাম পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1ZNXxz296OOep-Hl8CwaWrkmj-MebcGxm&sz=w400"
+            alt="কুরআন ও সহীহ হাদিসের আলোকে ব্যভিচার ও সমকাম বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">২৫</span>
+        <div class="title">কুরআন ও সহীহ হাদিসের আলোকে ব্যভিচার ও সমকাম</div>
+        <div class="author"><i class="fas fa-user-pen"></i> মুস্তাফিজুর রহমান</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1ZNXxz296OOep-Hl8CwaWrkmj-MebcGxm/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1ZNXxz296OOep-Hl8CwaWrkmj-MebcGxm" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">২৬</span>
-    <div class="title">পাঁচটি আয়াতের ব্যাখ্যা</div>
-    <div class="author"><i class="fas fa-user-pen"></i> শাইখ আহমাদ মুসা জিবরিল</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1a9njhj2pVx6CDdeF5vYQHvsxF1gARaIY/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1a9njhj2pVx6CDdeF5vYQHvsxF1gARaIY" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1a9njhj2pVx6CDdeF5vYQHvsxF1gARaIY/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="পাঁচটি আয়াতের ব্যাখ্যা পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1a9njhj2pVx6CDdeF5vYQHvsxF1gARaIY&sz=w400"
+            alt="পাঁচটি আয়াতের ব্যাখ্যা বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">২৬</span>
+        <div class="title">পাঁচটি আয়াতের ব্যাখ্যা</div>
+        <div class="author"><i class="fas fa-user-pen"></i> শাইখ আহমাদ মুসা জিবরিল</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1a9njhj2pVx6CDdeF5vYQHvsxF1gARaIY/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1a9njhj2pVx6CDdeF5vYQHvsxF1gARaIY" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 
 <div class="book-card">
-    <span class="book-index">২৭</span>
-    <div class="title">বিষয় ভিত্তিক শানে নূযুল</div>
-    <div class="author"><i class="fas fa-user-pen"></i> হুসাইন বিন সোহরাব</div>
-    <div class="book-actions">
-        <a href="https://drive.google.com/file/d/1TalZ261rZ-0bbroPxyfpt1_VMs-2pmfQ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-        <a href="https://drive.google.com/uc?export=download&id=1TalZ261rZ-0bbroPxyfpt1_VMs-2pmfQ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-        <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+    <a href="https://drive.google.com/file/d/1TalZ261rZ-0bbroPxyfpt1_VMs-2pmfQ/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="বিষয় ভিত্তিক শানে নূযুল পড়ুন">
+        <img
+            src="https://drive.google.com/thumbnail?id=1TalZ261rZ-0bbroPxyfpt1_VMs-2pmfQ&sz=w400"
+            alt="বিষয় ভিত্তিক শানে নূযুল বইয়ের প্রচ্ছদ"
+            class="book-cover"
+            loading="lazy"
+            onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+        >
+        <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+    </a>
+
+    <div class="book-content">
+        <span class="book-index">২৭</span>
+        <div class="title">বিষয় ভিত্তিক শানে নূযুল</div>
+        <div class="author"><i class="fas fa-user-pen"></i> হুসাইন বিন সোহরাব</div>
+        <div class="book-actions">
+            <a href="https://drive.google.com/file/d/1TalZ261rZ-0bbroPxyfpt1_VMs-2pmfQ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+            <a href="https://drive.google.com/uc?export=download&id=1TalZ261rZ-0bbroPxyfpt1_VMs-2pmfQ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+        </div>
     </div>
 </div>
 </div> <!-- end .books-grid -->

@@ -372,7 +372,7 @@
         }
 
         /* ============================================================
-                   BOOKS GRID (no cover images — clean text cards)
+                   BOOKS GRID (with book cover images)
                    ============================================================ */
         .category-books {
             padding: 40px 0 80px;
@@ -381,19 +381,63 @@
 
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 14px;
         }
 
         .book-card {
             background: var(--white);
             border-radius: var(--radius);
-            padding: 24px 26px 26px;
+            overflow: hidden;
             box-shadow: var(--shadow-sm);
             transition: var(--transition);
             border: 1px solid var(--teal-50);
             display: flex;
             flex-direction: column;
+            min-width: 0;
+        }
+
+        .book-cover-link {
+            position: relative;
+            display: block;
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+            background: linear-gradient(145deg, var(--teal-100), var(--cream-dark));
+            border-bottom: 1px solid var(--teal-100);
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.4s ease;
+        }
+
+        .book-card:hover .book-cover {
+            transform: scale(1.04);
+        }
+
+        .cover-fallback-icon {
+            display: none;
+            position: absolute;
+            inset: 0;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--teal-500);
+        }
+
+        .book-cover-link.cover-fallback .cover-fallback-icon {
+            display: flex;
+        }
+
+        .book-content {
+            padding: 10px 11px 11px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
 
         .book-card:hover {
@@ -408,25 +452,33 @@
             font-weight: 600;
             color: var(--teal-400);
             background: var(--teal-50);
-            padding: 2px 12px;
+            padding: 1px 8px;
             border-radius: 50px;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             align-self: flex-start;
             letter-spacing: 0.5px;
         }
 
         .book-card .title {
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 0.88rem;
             color: var(--gray-900);
             margin-bottom: 4px;
-            line-height: 1.4;
+            line-height: 1.35;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .book-card .author {
-            font-size: 0.9rem;
+            font-size: 0.72rem;
             color: var(--gray-500);
-            margin-bottom: 16px;
+            margin-bottom: 9px;
+            line-height: 1.35;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .book-card .author i {
@@ -436,8 +488,8 @@
 
         .book-card .book-actions {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 6px;
+            flex-wrap: nowrap;
             margin-top: auto;
             align-items: center;
         }
@@ -445,9 +497,9 @@
         .book-card .book-actions .btn {
             flex: 1;
             justify-content: center;
-            padding: 8px 14px;
-            font-size: 0.82rem;
-            min-width: 70px;
+            padding: 7px 8px;
+            font-size: 0.68rem;
+            min-width: 34px;
         }
 
         .book-card .book-actions .btn-read {
@@ -692,30 +744,36 @@
             }
 
             .books-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 12px;
             }
 
-            .book-card {
-                padding: 18px 16px 20px;
+            .book-content {
+                padding: 9px 9px 10px;
             }
 
             .book-card .title {
-                font-size: 0.95rem;
+                font-size: 0.82rem;
             }
 
             .book-card .author {
-                font-size: 0.8rem;
+                font-size: 0.68rem;
+                margin-bottom: 8px;
+            }
+
+            .book-card .book-actions {
+                gap: 6px;
             }
 
             .book-card .book-actions .btn {
-                font-size: 0.7rem;
-                padding: 6px 10px;
-                min-width: 50px;
+                font-size: 0.62rem;
+                padding: 6px 4px;
             }
 
+            .book-card .book-actions .btn-download,
             .book-card .book-actions .btn-share {
-                min-width: 36px;
+                flex-basis: 30px;
+                min-width: 30px;
                 padding: 6px;
             }
 
@@ -736,33 +794,40 @@
             }
 
             .books-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 9px;
             }
 
-            .book-card {
-                padding: 14px 12px 16px;
+            .book-content {
+                padding: 8px 8px 9px;
+            }
+
+            .book-card .book-index {
+                font-size: 0.62rem;
+                padding: 2px 8px;
+                margin-bottom: 7px;
             }
 
             .book-card .title {
-                font-size: 0.85rem;
+                font-size: 0.72rem;
             }
 
             .book-card .author {
-                font-size: 0.7rem;
-                margin-bottom: 12px;
+                font-size: 0.62rem;
+                margin-bottom: 7px;
             }
 
             .book-card .book-actions .btn {
-                font-size: 0.6rem;
-                padding: 4px 8px;
-                min-width: 40px;
-                gap: 4px;
+                font-size: 0.56rem;
+                padding: 5px 3px;
+                gap: 3px;
             }
 
+            .book-card .book-actions .btn-download,
             .book-card .book-actions .btn-share {
+                flex-basis: 30px;
                 min-width: 30px;
-                padding: 4px;
+                padding: 6px;
             }
 
             .category-banner .title-group h1 {
@@ -859,337 +924,701 @@
 
                     <!-- 01. নামাযের ভুলত্রুটি -->
                     <div class="book-card">
-                        <span class="book-index">০১</span>
-                        <div class="title">নামাযের ভুলত্রুটি</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> তানজীল আরেফীন আদনান</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1Ert4PiwThFjxMFJFWLjmHMOV8miHI7uv/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1Ert4PiwThFjxMFJFWLjmHMOV8miHI7uv" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1Ert4PiwThFjxMFJFWLjmHMOV8miHI7uv/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="নামাযের ভুলত্রুটি পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1Ert4PiwThFjxMFJFWLjmHMOV8miHI7uv&sz=w400"
+                                alt="নামাযের ভুলত্রুটি বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০১</span>
+                            <div class="title">নামাযের ভুলত্রুটি</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> তানজীল আরেফীন আদনান</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1Ert4PiwThFjxMFJFWLjmHMOV8miHI7uv/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1Ert4PiwThFjxMFJFWLjmHMOV8miHI7uv" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 02. প্রচলিত ভুল বনাম রাসূল সা. এর সালাত আদায়ের পদ্ধতি -->
                     <div class="book-card">
-                        <span class="book-index">০২</span>
-                        <div class="title">প্রচলিত ভুল বনাম রাসূল সা. এর সালাত আদায়ের পদ্ধতি</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মুরাদ বিন আমজাদ</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/11ACZ7oPz7qSQbMiHKSSV5DqXPBgyvwC3/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=11ACZ7oPz7qSQbMiHKSSV5DqXPBgyvwC3" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/11ACZ7oPz7qSQbMiHKSSV5DqXPBgyvwC3/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="প্রচলিত ভুল বনাম রাসূল সা. এর সালাত আদায়ের পদ্ধতি পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=11ACZ7oPz7qSQbMiHKSSV5DqXPBgyvwC3&sz=w400"
+                                alt="প্রচলিত ভুল বনাম রাসূল সা. এর সালাত আদায়ের পদ্ধতি বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০২</span>
+                            <div class="title">প্রচলিত ভুল বনাম রাসূল সা. এর সালাত আদায়ের পদ্ধতি</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মুরাদ বিন আমজাদ</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/11ACZ7oPz7qSQbMiHKSSV5DqXPBgyvwC3/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=11ACZ7oPz7qSQbMiHKSSV5DqXPBgyvwC3" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 03. রাসূল(সাঃ) এর ছালাত বনাম প্রচলিত ছালাত -->
                     <div class="book-card">
-                        <span class="book-index">০৩</span>
-                        <div class="title">রাসূল(সাঃ) এর ছালাত বনাম প্রচলিত ছালাত</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> আব্দুর রাজ্জাক বিন ইউসুফ</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1b2i6ZvwnPH3QGAcp4bX4GnyIOVZinZBj/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1b2i6ZvwnPH3QGAcp4bX4GnyIOVZinZBj" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1b2i6ZvwnPH3QGAcp4bX4GnyIOVZinZBj/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="রাসূল(সাঃ) এর ছালাত বনাম প্রচলিত ছালাত পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1b2i6ZvwnPH3QGAcp4bX4GnyIOVZinZBj&sz=w400"
+                                alt="রাসূল(সাঃ) এর ছালাত বনাম প্রচলিত ছালাত বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৩</span>
+                            <div class="title">রাসূল(সাঃ) এর ছালাত বনাম প্রচলিত ছালাত</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> আব্দুর রাজ্জাক বিন ইউসুফ</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1b2i6ZvwnPH3QGAcp4bX4GnyIOVZinZBj/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1b2i6ZvwnPH3QGAcp4bX4GnyIOVZinZBj" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 04. কিভাবে নামাযে মনোযোগী হবেন -->
                     <div class="book-card">
-                        <span class="book-index">০৪</span>
-                        <div class="title">কিভাবে নামাযে মনোযোগী হবেন</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> গোলাম মাওলা</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1ZNLzup3P9dejMJIU_PBACm1XDZWW4dsN/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1ZNLzup3P9dejMJIU_PBACm1XDZWW4dsN" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1ZNLzup3P9dejMJIU_PBACm1XDZWW4dsN/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="কিভাবে নামাযে মনোযোগী হবেন পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1ZNLzup3P9dejMJIU_PBACm1XDZWW4dsN&sz=w400"
+                                alt="কিভাবে নামাযে মনোযোগী হবেন বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৪</span>
+                            <div class="title">কিভাবে নামাযে মনোযোগী হবেন</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> গোলাম মাওলা</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1ZNLzup3P9dejMJIU_PBACm1XDZWW4dsN/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1ZNLzup3P9dejMJIU_PBACm1XDZWW4dsN" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 05. দলিলসহ নামাজের মাসায়েল -->
                     <div class="book-card">
-                        <span class="book-index">০৫</span>
-                        <div class="title">দলিলসহ নামাজের মাসায়েল</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> আব্দুল মতিন</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1FMtI5qavKf0NQ5m7bQwF80ldx6TM4CFf/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1FMtI5qavKf0NQ5m7bQwF80ldx6TM4CFf" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1FMtI5qavKf0NQ5m7bQwF80ldx6TM4CFf/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="দলিলসহ নামাজের মাসায়েল পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1FMtI5qavKf0NQ5m7bQwF80ldx6TM4CFf&sz=w400"
+                                alt="দলিলসহ নামাজের মাসায়েল বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৫</span>
+                            <div class="title">দলিলসহ নামাজের মাসায়েল</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> আব্দুল মতিন</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1FMtI5qavKf0NQ5m7bQwF80ldx6TM4CFf/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1FMtI5qavKf0NQ5m7bQwF80ldx6TM4CFf" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 06. এস নামাজ পড়ি -->
                     <div class="book-card">
-                        <span class="book-index">০৬</span>
-                        <div class="title">এস নামাজ পড়ি</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> শহীদ নাসিম</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1h2XTYbw7fiTFqmKIhELuPBLhMk-L6g96/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1h2XTYbw7fiTFqmKIhELuPBLhMk-L6g96" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1h2XTYbw7fiTFqmKIhELuPBLhMk-L6g96/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="এস নামাজ পড়ি পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1h2XTYbw7fiTFqmKIhELuPBLhMk-L6g96&sz=w400"
+                                alt="এস নামাজ পড়ি বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৬</span>
+                            <div class="title">এস নামাজ পড়ি</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> শহীদ নাসিম</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1h2XTYbw7fiTFqmKIhELuPBLhMk-L6g96/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1h2XTYbw7fiTFqmKIhELuPBLhMk-L6g96" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 07. নামাজ কেন আজ ব্যর্থ হচ্ছে -->
                     <div class="book-card">
-                        <span class="book-index">০৭</span>
-                        <div class="title">নামাজ কেন আজ ব্যর্থ হচ্ছে</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মতিয়ার রহমান</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1bKOXFoMgYj1S9EHhQwY1b3Asj-x_1zdF/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1bKOXFoMgYj1S9EHhQwY1b3Asj-x_1zdF" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1bKOXFoMgYj1S9EHhQwY1b3Asj-x_1zdF/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="নামাজ কেন আজ ব্যর্থ হচ্ছে পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1bKOXFoMgYj1S9EHhQwY1b3Asj-x_1zdF&sz=w400"
+                                alt="নামাজ কেন আজ ব্যর্থ হচ্ছে বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৭</span>
+                            <div class="title">নামাজ কেন আজ ব্যর্থ হচ্ছে</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মতিয়ার রহমান</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1bKOXFoMgYj1S9EHhQwY1b3Asj-x_1zdF/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1bKOXFoMgYj1S9EHhQwY1b3Asj-x_1zdF" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 08. ধারাবাহিক পূর্ণাঙ্গ নামাজ -->
                     <div class="book-card">
-                        <span class="book-index">০৮</span>
-                        <div class="title">ধারাবাহিক পূর্ণাঙ্গ নামাজ</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> ফজলুর রহমান</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1FMyoaXhtQsLqv4xu6eMeTcwVLPqrj4AP/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1FMyoaXhtQsLqv4xu6eMeTcwVLPqrj4AP" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1FMyoaXhtQsLqv4xu6eMeTcwVLPqrj4AP/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ধারাবাহিক পূর্ণাঙ্গ নামাজ পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1FMyoaXhtQsLqv4xu6eMeTcwVLPqrj4AP&sz=w400"
+                                alt="ধারাবাহিক পূর্ণাঙ্গ নামাজ বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৮</span>
+                            <div class="title">ধারাবাহিক পূর্ণাঙ্গ নামাজ</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> ফজলুর রহমান</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1FMyoaXhtQsLqv4xu6eMeTcwVLPqrj4AP/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1FMyoaXhtQsLqv4xu6eMeTcwVLPqrj4AP" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 09. নামাযে কিভাবে মনোযোগী হবেন -->
                     <div class="book-card">
-                        <span class="book-index">০৯</span>
-                        <div class="title">নামাযে কিভাবে মনোযোগী হবেন</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> গোলাম মওলা</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1gKhgOp1ph3Wais54gAq39j6TOT-nrYkB/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1gKhgOp1ph3Wais54gAq39j6TOT-nrYkB" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1gKhgOp1ph3Wais54gAq39j6TOT-nrYkB/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="নামাযে কিভাবে মনোযোগী হবেন পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1gKhgOp1ph3Wais54gAq39j6TOT-nrYkB&sz=w400"
+                                alt="নামাযে কিভাবে মনোযোগী হবেন বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৯</span>
+                            <div class="title">নামাযে কিভাবে মনোযোগী হবেন</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> গোলাম মওলা</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1gKhgOp1ph3Wais54gAq39j6TOT-nrYkB/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1gKhgOp1ph3Wais54gAq39j6TOT-nrYkB" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 10. নামায জান্নাতের চাবি -->
                     <div class="book-card">
-                        <span class="book-index">১০</span>
-                        <div class="title">নামায জান্নাতের চাবি</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মাসুদা সুলতানা রুমী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/19cdWwMTecfHMqFLPZmdlOY4GUWldEdOA/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=19cdWwMTecfHMqFLPZmdlOY4GUWldEdOA" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/19cdWwMTecfHMqFLPZmdlOY4GUWldEdOA/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="নামায জান্নাতের চাবি পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=19cdWwMTecfHMqFLPZmdlOY4GUWldEdOA&sz=w400"
+                                alt="নামায জান্নাতের চাবি বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১০</span>
+                            <div class="title">নামায জান্নাতের চাবি</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মাসুদা সুলতানা রুমী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/19cdWwMTecfHMqFLPZmdlOY4GUWldEdOA/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=19cdWwMTecfHMqFLPZmdlOY4GUWldEdOA" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 11. নামাজ ও সমাজ -->
                     <div class="book-card">
-                        <span class="book-index">১১</span>
-                        <div class="title">নামাজ ও সমাজ</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মোশাররফ হুসাইন</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1i1Z99nbus4QFwCzzihSs-ueJlLF24J7Y/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1i1Z99nbus4QFwCzzihSs-ueJlLF24J7Y" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1i1Z99nbus4QFwCzzihSs-ueJlLF24J7Y/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="নামাজ ও সমাজ পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1i1Z99nbus4QFwCzzihSs-ueJlLF24J7Y&sz=w400"
+                                alt="নামাজ ও সমাজ বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১১</span>
+                            <div class="title">নামাজ ও সমাজ</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মোশাররফ হুসাইন</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1i1Z99nbus4QFwCzzihSs-ueJlLF24J7Y/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1i1Z99nbus4QFwCzzihSs-ueJlLF24J7Y" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 12. কিভাবে নামাজ পড়িতে হয় -->
                     <div class="book-card">
-                        <span class="book-index">১২</span>
-                        <div class="title">কিভাবে নামাজ পড়িতে হয়</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> আব্দুল আলী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/14wyby_PmkYzEpKhoEtRs_W9aUnxLHXvx/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=14wyby_PmkYzEpKhoEtRs_W9aUnxLHXvx" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/14wyby_PmkYzEpKhoEtRs_W9aUnxLHXvx/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="কিভাবে নামাজ পড়িতে হয় পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=14wyby_PmkYzEpKhoEtRs_W9aUnxLHXvx&sz=w400"
+                                alt="কিভাবে নামাজ পড়িতে হয় বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১২</span>
+                            <div class="title">কিভাবে নামাজ পড়িতে হয়</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> আব্দুল আলী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/14wyby_PmkYzEpKhoEtRs_W9aUnxLHXvx/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=14wyby_PmkYzEpKhoEtRs_W9aUnxLHXvx" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 13. নামাযের অন্তরালে -->
                     <div class="book-card">
-                        <span class="book-index">১৩</span>
-                        <div class="title">নামাযের অন্তরালে</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> শহীদুল মুলক</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1xXqzYR7RrG2N1ojdfEhycsfHtha0Rj2l/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1xXqzYR7RrG2N1ojdfEhycsfHtha0Rj2l" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1xXqzYR7RrG2N1ojdfEhycsfHtha0Rj2l/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="নামাযের অন্তরালে পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1xXqzYR7RrG2N1ojdfEhycsfHtha0Rj2l&sz=w400"
+                                alt="নামাযের অন্তরালে বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৩</span>
+                            <div class="title">নামাযের অন্তরালে</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> শহীদুল মুলক</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1xXqzYR7RrG2N1ojdfEhycsfHtha0Rj2l/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1xXqzYR7RrG2N1ojdfEhycsfHtha0Rj2l" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 14. নামায কায়েম কর -->
                     <div class="book-card">
-                        <span class="book-index">১৪</span>
-                        <div class="title">নামায কায়েম কর</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মোশাররফ হুসেন</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1gvSHJ0MdsFGdL2-6XVQ9vH4ooDof09uc/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1gvSHJ0MdsFGdL2-6XVQ9vH4ooDof09uc" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1gvSHJ0MdsFGdL2-6XVQ9vH4ooDof09uc/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="নামায কায়েম কর পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1gvSHJ0MdsFGdL2-6XVQ9vH4ooDof09uc&sz=w400"
+                                alt="নামায কায়েম কর বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৪</span>
+                            <div class="title">নামায কায়েম কর</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মোশাররফ হুসেন</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1gvSHJ0MdsFGdL2-6XVQ9vH4ooDof09uc/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1gvSHJ0MdsFGdL2-6XVQ9vH4ooDof09uc" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 15. নামাজের মৌলিক শিক্ষা -->
                     <div class="book-card">
-                        <span class="book-index">১৫</span>
-                        <div class="title">নামাজের মৌলিক শিক্ষা</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> আবুল খায়ের খন্দকার</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1VtWbTPNEkqqh8Fh27K92HBxC-b-dTOSe/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1VtWbTPNEkqqh8Fh27K92HBxC-b-dTOSe" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1VtWbTPNEkqqh8Fh27K92HBxC-b-dTOSe/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="নামাজের মৌলিক শিক্ষা পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1VtWbTPNEkqqh8Fh27K92HBxC-b-dTOSe&sz=w400"
+                                alt="নামাজের মৌলিক শিক্ষা বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৫</span>
+                            <div class="title">নামাজের মৌলিক শিক্ষা</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> আবুল খায়ের খন্দকার</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1VtWbTPNEkqqh8Fh27K92HBxC-b-dTOSe/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1VtWbTPNEkqqh8Fh27K92HBxC-b-dTOSe" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 16. আযানের মাধ্যমে কাদেরকে নামাযের জন্য ডাকা হয় -->
                     <div class="book-card">
-                        <span class="book-index">১৬</span>
-                        <div class="title">আযানের মাধ্যমে কাদেরকে নামাযের জন্য ডাকা হয়</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> গোলাম আজম</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1sA8E6dyEKfVyuoXNfQBvWFAhUtsyryD9/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1sA8E6dyEKfVyuoXNfQBvWFAhUtsyryD9" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1sA8E6dyEKfVyuoXNfQBvWFAhUtsyryD9/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="আযানের মাধ্যমে কাদেরকে নামাযের জন্য ডাকা হয় পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1sA8E6dyEKfVyuoXNfQBvWFAhUtsyryD9&sz=w400"
+                                alt="আযানের মাধ্যমে কাদেরকে নামাযের জন্য ডাকা হয় বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৬</span>
+                            <div class="title">আযানের মাধ্যমে কাদেরকে নামাযের জন্য ডাকা হয়</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> গোলাম আজম</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1sA8E6dyEKfVyuoXNfQBvWFAhUtsyryD9/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1sA8E6dyEKfVyuoXNfQBvWFAhUtsyryD9" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 17. নামাযের মাসায়েল -->
                     <div class="book-card">
-                        <span class="book-index">১৭</span>
-                        <div class="title">নামাযের মাসায়েল</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> আব্দুল মতিন</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1xWj22RBplkVgKlg9wxR6M8mNlH3M6SzX/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1xWj22RBplkVgKlg9wxR6M8mNlH3M6SzX" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1xWj22RBplkVgKlg9wxR6M8mNlH3M6SzX/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="নামাযের মাসায়েল পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1xWj22RBplkVgKlg9wxR6M8mNlH3M6SzX&sz=w400"
+                                alt="নামাযের মাসায়েল বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৭</span>
+                            <div class="title">নামাযের মাসায়েল</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> আব্দুল মতিন</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1xWj22RBplkVgKlg9wxR6M8mNlH3M6SzX/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1xWj22RBplkVgKlg9wxR6M8mNlH3M6SzX" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 18. সালাত নবীজির শেষ আদেশ -->
                     <div class="book-card">
-                        <span class="book-index">১৮</span>
-                        <div class="title">সালাত নবীজির শেষ আদেশ</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> শাইখ আহমাদ মুসা জিবরিল</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1bmyGj0xhrNIhuu9taPvAOqJTZPJFPJOo/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1bmyGj0xhrNIhuu9taPvAOqJTZPJFPJOo" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1bmyGj0xhrNIhuu9taPvAOqJTZPJFPJOo/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="সালাত নবীজির শেষ আদেশ পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1bmyGj0xhrNIhuu9taPvAOqJTZPJFPJOo&sz=w400"
+                                alt="সালাত নবীজির শেষ আদেশ বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৮</span>
+                            <div class="title">সালাত নবীজির শেষ আদেশ</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> শাইখ আহমাদ মুসা জিবরিল</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1bmyGj0xhrNIhuu9taPvAOqJTZPJFPJOo/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1bmyGj0xhrNIhuu9taPvAOqJTZPJFPJOo" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 19. আল্লাহর রাসুল (সঃ) কিভাবে নামায পড়তেন -->
                     <div class="book-card">
-                        <span class="book-index">১৯</span>
-                        <div class="title">আল্লাহর রাসুল (সঃ) কিভাবে নামায পড়তেন</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> ইবন্যুল কাইয়্যুম</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1I3vj4P5E7iLkjS6u67LJj4EPyoEQnGZO/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1I3vj4P5E7iLkjS6u67LJj4EPyoEQnGZO" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1I3vj4P5E7iLkjS6u67LJj4EPyoEQnGZO/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="আল্লাহর রাসুল (সঃ) কিভাবে নামায পড়তেন পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1I3vj4P5E7iLkjS6u67LJj4EPyoEQnGZO&sz=w400"
+                                alt="আল্লাহর রাসুল (সঃ) কিভাবে নামায পড়তেন বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৯</span>
+                            <div class="title">আল্লাহর রাসুল (সঃ) কিভাবে নামায পড়তেন</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> ইবন্যুল কাইয়্যুম</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1I3vj4P5E7iLkjS6u67LJj4EPyoEQnGZO/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1I3vj4P5E7iLkjS6u67LJj4EPyoEQnGZO" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 20. রাসুল (সঃ) এর প্র্যাকটিক্যাল নামাজ -->
                     <div class="book-card">
-                        <span class="book-index">২০</span>
-                        <div class="title">রাসুল (সঃ) এর প্র‍্যাকটিক্যাল নামাজ</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> জাকির নায়েক</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1Jf3MTWs6kDrC38dNhDmTv2IwG1tMf8fO/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1Jf3MTWs6kDrC38dNhDmTv2IwG1tMf8fO" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1Jf3MTWs6kDrC38dNhDmTv2IwG1tMf8fO/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="রাসুল (সঃ) এর প্র‍্যাকটিক্যাল নামাজ পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1Jf3MTWs6kDrC38dNhDmTv2IwG1tMf8fO&sz=w400"
+                                alt="রাসুল (সঃ) এর প্র‍্যাকটিক্যাল নামাজ বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২০</span>
+                            <div class="title">রাসুল (সঃ) এর প্র‍্যাকটিক্যাল নামাজ</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> জাকির নায়েক</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1Jf3MTWs6kDrC38dNhDmTv2IwG1tMf8fO/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1Jf3MTWs6kDrC38dNhDmTv2IwG1tMf8fO" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 21. যেভাবে নামায পড়তেন রাসুলুল্লাহ (সঃ) -->
                     <div class="book-card">
-                        <span class="book-index">২১</span>
-                        <div class="title">যেভাবে নামায পড়তেন রাসুলুল্লাহ (সঃ)</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> নুরুল ইসলাম</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1qSiX7L29mrTqChbut2KcsUFtpsNnCxF0/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1qSiX7L29mrTqChbut2KcsUFtpsNnCxF0" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1qSiX7L29mrTqChbut2KcsUFtpsNnCxF0/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="যেভাবে নামায পড়তেন রাসুলুল্লাহ (সঃ) পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1qSiX7L29mrTqChbut2KcsUFtpsNnCxF0&sz=w400"
+                                alt="যেভাবে নামায পড়তেন রাসুলুল্লাহ (সঃ) বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২১</span>
+                            <div class="title">যেভাবে নামায পড়তেন রাসুলুল্লাহ (সঃ)</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> নুরুল ইসলাম</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1qSiX7L29mrTqChbut2KcsUFtpsNnCxF0/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1qSiX7L29mrTqChbut2KcsUFtpsNnCxF0" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 22. সালাতুন নবী ও বিবিধ মাসায়েল -->
                     <div class="book-card">
-                        <span class="book-index">২২</span>
-                        <div class="title">সালাতুন নবী ও বিবিধ মাসায়েল</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> ড. জাকির নায়েক</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1IDm8iFKgRfJpJsxxrbqJBNcr5Rvka5ql/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1IDm8iFKgRfJpJsxxrbqJBNcr5Rvka5ql" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1IDm8iFKgRfJpJsxxrbqJBNcr5Rvka5ql/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="সালাতুন নবী ও বিবিধ মাসায়েল পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1IDm8iFKgRfJpJsxxrbqJBNcr5Rvka5ql&sz=w400"
+                                alt="সালাতুন নবী ও বিবিধ মাসায়েল বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২২</span>
+                            <div class="title">সালাতুন নবী ও বিবিধ মাসায়েল</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> ড. জাকির নায়েক</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1IDm8iFKgRfJpJsxxrbqJBNcr5Rvka5ql/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1IDm8iFKgRfJpJsxxrbqJBNcr5Rvka5ql" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 23. আমার সালাত ছুটে গেল -->
                     <div class="book-card">
-                        <span class="book-index">২৩</span>
-                        <div class="title">আমার সালাত ছুটে গেল</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> ইসলাম জামাল</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1TCcItgsjxSvm4MpyQy0whPsaLSr_iAxF/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1TCcItgsjxSvm4MpyQy0whPsaLSr_iAxF" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1TCcItgsjxSvm4MpyQy0whPsaLSr_iAxF/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="আমার সালাত ছুটে গেল পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1TCcItgsjxSvm4MpyQy0whPsaLSr_iAxF&sz=w400"
+                                alt="আমার সালাত ছুটে গেল বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২৩</span>
+                            <div class="title">আমার সালাত ছুটে গেল</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> ইসলাম জামাল</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1TCcItgsjxSvm4MpyQy0whPsaLSr_iAxF/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1TCcItgsjxSvm4MpyQy0whPsaLSr_iAxF" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 24. মনের মতো সালাত -->
                     <div class="book-card">
-                        <span class="book-index">২৪</span>
-                        <div class="title">মনের মতো সালাত</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> ড. শামসুল আরেফীন</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1Gjs5Z2aQS-6pLzAAPaBnZHNmYPZ5WuXf/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1Gjs5Z2aQS-6pLzAAPaBnZHNmYPZ5WuXf" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1Gjs5Z2aQS-6pLzAAPaBnZHNmYPZ5WuXf/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="মনের মতো সালাত পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1Gjs5Z2aQS-6pLzAAPaBnZHNmYPZ5WuXf&sz=w400"
+                                alt="মনের মতো সালাত বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২৪</span>
+                            <div class="title">মনের মতো সালাত</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> ড. শামসুল আরেফীন</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1Gjs5Z2aQS-6pLzAAPaBnZHNmYPZ5WuXf/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1Gjs5Z2aQS-6pLzAAPaBnZHNmYPZ5WuXf" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 25. ইকামতুস সালাত -->
                     <div class="book-card">
-                        <span class="book-index">২৫</span>
-                        <div class="title">ইকামতুস সালাত</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মুফতি কাজী ইব্রাহীম</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1SGH1hUwVpJDxiGKpXhbfIvLUFyqDY846/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1SGH1hUwVpJDxiGKpXhbfIvLUFyqDY846" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1SGH1hUwVpJDxiGKpXhbfIvLUFyqDY846/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইকামতুস সালাত পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1SGH1hUwVpJDxiGKpXhbfIvLUFyqDY846&sz=w400"
+                                alt="ইকামতুস সালাত বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২৫</span>
+                            <div class="title">ইকামতুস সালাত</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মুফতি কাজী ইব্রাহীম</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1SGH1hUwVpJDxiGKpXhbfIvLUFyqDY846/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1SGH1hUwVpJDxiGKpXhbfIvLUFyqDY846" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 26. সালাত পড়ি বুঝে বুঝে -->
                     <div class="book-card">
-                        <span class="book-index">২৬</span>
-                        <div class="title">সালাত পড়ি বুঝে বুঝে</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> রেজাউল করিম মারুফ</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1UFJjKVPPkJ0eI5zISewwlCVvBz7f40uF/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1UFJjKVPPkJ0eI5zISewwlCVvBz7f40uF" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1UFJjKVPPkJ0eI5zISewwlCVvBz7f40uF/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="সালাত পড়ি বুঝে বুঝে পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1UFJjKVPPkJ0eI5zISewwlCVvBz7f40uF&sz=w400"
+                                alt="সালাত পড়ি বুঝে বুঝে বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২৬</span>
+                            <div class="title">সালাত পড়ি বুঝে বুঝে</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> রেজাউল করিম মারুফ</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1UFJjKVPPkJ0eI5zISewwlCVvBz7f40uF/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1UFJjKVPPkJ0eI5zISewwlCVvBz7f40uF" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 27. কিয়ামুল লাইল -->
                     <div class="book-card">
-                        <span class="book-index">২৭</span>
-                        <div class="title">কিয়ামুল লাইল</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> শাঈখ আহমাদ মুসা জিবরীল</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/14pje44byu5YYY3f-S5AR4E6ruW103zmy/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=14pje44byu5YYY3f-S5AR4E6ruW103zmy" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/14pje44byu5YYY3f-S5AR4E6ruW103zmy/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="কিয়ামুল লাইল পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=14pje44byu5YYY3f-S5AR4E6ruW103zmy&sz=w400"
+                                alt="কিয়ামুল লাইল বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২৭</span>
+                            <div class="title">কিয়ামুল লাইল</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> শাঈখ আহমাদ মুসা জিবরীল</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/14pje44byu5YYY3f-S5AR4E6ruW103zmy/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=14pje44byu5YYY3f-S5AR4E6ruW103zmy" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 28. যে সালাতে হৃদয় গলে -->
                     <div class="book-card">
-                        <span class="book-index">২৮</span>
-                        <div class="title">যে সালাতে হৃদয় গলে</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> হাবিবুর রহমান</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1a7RLEy10_MTGaDpuIbjMuPk_VTgC_CdI/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1a7RLEy10_MTGaDpuIbjMuPk_VTgC_CdI" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1a7RLEy10_MTGaDpuIbjMuPk_VTgC_CdI/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="যে সালাতে হৃদয় গলে পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1a7RLEy10_MTGaDpuIbjMuPk_VTgC_CdI&sz=w400"
+                                alt="যে সালাতে হৃদয় গলে বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২৮</span>
+                            <div class="title">যে সালাতে হৃদয় গলে</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> হাবিবুর রহমান</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1a7RLEy10_MTGaDpuIbjMuPk_VTgC_CdI/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1a7RLEy10_MTGaDpuIbjMuPk_VTgC_CdI" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 

@@ -381,19 +381,63 @@
 
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 14px;
         }
 
         .book-card {
             background: var(--white);
             border-radius: var(--radius);
-            padding: 24px 26px 26px;
+            overflow: hidden;
             box-shadow: var(--shadow-sm);
             transition: var(--transition);
             border: 1px solid var(--teal-50);
             display: flex;
             flex-direction: column;
+            min-width: 0;
+        }
+
+        .book-cover-link {
+            position: relative;
+            display: block;
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+            background: linear-gradient(145deg, var(--teal-100), var(--cream-dark));
+            border-bottom: 1px solid var(--teal-100);
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.4s ease;
+        }
+
+        .book-card:hover .book-cover {
+            transform: scale(1.04);
+        }
+
+        .cover-fallback-icon {
+            display: none;
+            position: absolute;
+            inset: 0;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--teal-500);
+        }
+
+        .book-cover-link.cover-fallback .cover-fallback-icon {
+            display: flex;
+        }
+
+        .book-content {
+            padding: 10px 11px 11px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
 
         .book-card:hover {
@@ -408,25 +452,33 @@
             font-weight: 600;
             color: var(--teal-400);
             background: var(--teal-50);
-            padding: 2px 12px;
+            padding: 1px 8px;
             border-radius: 50px;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             align-self: flex-start;
             letter-spacing: 0.5px;
         }
 
         .book-card .title {
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 0.88rem;
             color: var(--gray-900);
             margin-bottom: 4px;
-            line-height: 1.4;
+            line-height: 1.35;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .book-card .author {
-            font-size: 0.9rem;
+            font-size: 0.72rem;
             color: var(--gray-500);
-            margin-bottom: 16px;
+            margin-bottom: 9px;
+            line-height: 1.35;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .book-card .author i {
@@ -436,8 +488,8 @@
 
         .book-card .book-actions {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 6px;
+            flex-wrap: nowrap;
             margin-top: auto;
             align-items: center;
         }
@@ -445,9 +497,9 @@
         .book-card .book-actions .btn {
             flex: 1;
             justify-content: center;
-            padding: 8px 14px;
-            font-size: 0.82rem;
-            min-width: 70px;
+            padding: 7px 8px;
+            font-size: 0.68rem;
+            min-width: 34px;
         }
 
         .book-card .book-actions .btn-read {
@@ -692,30 +744,36 @@
             }
 
             .books-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 12px;
             }
 
-            .book-card {
-                padding: 18px 16px 20px;
+            .book-content {
+                padding: 9px 9px 10px;
             }
 
             .book-card .title {
-                font-size: 0.95rem;
+                font-size: 0.82rem;
             }
 
             .book-card .author {
-                font-size: 0.8rem;
+                font-size: 0.68rem;
+                margin-bottom: 8px;
+            }
+
+            .book-card .book-actions {
+                gap: 6px;
             }
 
             .book-card .book-actions .btn {
-                font-size: 0.7rem;
-                padding: 6px 10px;
-                min-width: 50px;
+                font-size: 0.62rem;
+                padding: 6px 4px;
             }
 
+            .book-card .book-actions .btn-download,
             .book-card .book-actions .btn-share {
-                min-width: 36px;
+                flex-basis: 30px;
+                min-width: 30px;
                 padding: 6px;
             }
 
@@ -736,33 +794,40 @@
             }
 
             .books-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 9px;
             }
 
-            .book-card {
-                padding: 14px 12px 16px;
+            .book-content {
+                padding: 8px 8px 9px;
+            }
+
+            .book-card .book-index {
+                font-size: 0.62rem;
+                padding: 2px 8px;
+                margin-bottom: 7px;
             }
 
             .book-card .title {
-                font-size: 0.85rem;
+                font-size: 0.72rem;
             }
 
             .book-card .author {
-                font-size: 0.7rem;
-                margin-bottom: 12px;
+                font-size: 0.62rem;
+                margin-bottom: 7px;
             }
 
             .book-card .book-actions .btn {
-                font-size: 0.6rem;
-                padding: 4px 8px;
-                min-width: 40px;
-                gap: 4px;
+                font-size: 0.56rem;
+                padding: 5px 3px;
+                gap: 3px;
             }
 
+            .book-card .book-actions .btn-download,
             .book-card .book-actions .btn-share {
+                flex-basis: 30px;
                 min-width: 30px;
-                padding: 4px;
+                padding: 6px;
             }
 
             .category-banner .title-group h1 {
@@ -863,373 +928,776 @@
                     <!-- Book 1 to 31 — identical to previous version -->
                     <!-- 1. উসর বা ফসলের যাকাত -->
                     <div class="book-card">
-                        <span class="book-index">০১</span>
-                        <div class="title">উসর বা ফসলের যাকাত</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> ড. আব্দুল্লা জাহাঙ্গীর</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/14mjmJa3r0WgYqWh6WnMEGH1z2JoLS4uQ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=14mjmJa3r0WgYqWh6WnMEGH1z2JoLS4uQ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/14mjmJa3r0WgYqWh6WnMEGH1z2JoLS4uQ/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="উসর বা ফসলের যাকাত পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=14mjmJa3r0WgYqWh6WnMEGH1z2JoLS4uQ&sz=w400"
+                                alt="উসর বা ফসলের যাকাত বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০১</span>
+                            <div class="title">উসর বা ফসলের যাকাত</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> ড. আব্দুল্লা জাহাঙ্গীর</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/14mjmJa3r0WgYqWh6WnMEGH1z2JoLS4uQ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=14mjmJa3r0WgYqWh6WnMEGH1z2JoLS4uQ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 2. আপনার যাকাতে যাদের হক রয়েছে -->
                     <div class="book-card">
-                        <span class="book-index">০২</span>
-                        <div class="title">আপনার যাকাতে যাদের হক রয়েছে</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> হাবিবুল্লাহ মাহমুদ</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1YYgwfgZeO_q9W8bfkbdc_kl2f8skx0vM/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1YYgwfgZeO_q9W8bfkbdc_kl2f8skx0vM" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1YYgwfgZeO_q9W8bfkbdc_kl2f8skx0vM/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="আপনার যাকাতে যাদের হক রয়েছে পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1YYgwfgZeO_q9W8bfkbdc_kl2f8skx0vM&sz=w400"
+                                alt="আপনার যাকাতে যাদের হক রয়েছে বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০২</span>
+                            <div class="title">আপনার যাকাতে যাদের হক রয়েছে</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> হাবিবুল্লাহ মাহমুদ</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1YYgwfgZeO_q9W8bfkbdc_kl2f8skx0vM/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1YYgwfgZeO_q9W8bfkbdc_kl2f8skx0vM" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 3. স্বর্ণ ক্রয় বিক্রয় সংক্রান্ত বিবিধ প্রশ্নোত্তর -->
                     <div class="book-card">
-                        <span class="book-index">০৩</span>
-                        <div class="title">স্বর্ণ ক্রয় বিক্রয় সংক্রান্ত বিবিধ প্রশ্নোত্তর</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মুহাম্মদ বিন সালেহ আল উসাইমীন</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1Y2Fwefw9Bta4Pto4UIDGbQcCyxTc_e-h/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1Y2Fwefw9Bta4Pto4UIDGbQcCyxTc_e-h" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1Y2Fwefw9Bta4Pto4UIDGbQcCyxTc_e-h/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="স্বর্ণ ক্রয় বিক্রয় সংক্রান্ত বিবিধ প্রশ্নোত্তর পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1Y2Fwefw9Bta4Pto4UIDGbQcCyxTc_e-h&sz=w400"
+                                alt="স্বর্ণ ক্রয় বিক্রয় সংক্রান্ত বিবিধ প্রশ্নোত্তর বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৩</span>
+                            <div class="title">স্বর্ণ ক্রয় বিক্রয় সংক্রান্ত বিবিধ প্রশ্নোত্তর</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মুহাম্মদ বিন সালেহ আল উসাইমীন</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1Y2Fwefw9Bta4Pto4UIDGbQcCyxTc_e-h/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1Y2Fwefw9Bta4Pto4UIDGbQcCyxTc_e-h" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 4. সুদমুক্ত অর্থনীতি -->
                     <div class="book-card">
-                        <span class="book-index">০৪</span>
-                        <div class="title">সুদমুক্ত অর্থনীতি</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> ডাঃ জাকির নায়েক</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1Y0IQnrwrlf1meOLHCfgD-vETjsJoM0PG/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1Y0IQnrwrlf1meOLHCfgD-vETjsJoM0PG" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1Y0IQnrwrlf1meOLHCfgD-vETjsJoM0PG/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="সুদমুক্ত অর্থনীতি পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1Y0IQnrwrlf1meOLHCfgD-vETjsJoM0PG&sz=w400"
+                                alt="সুদমুক্ত অর্থনীতি বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৪</span>
+                            <div class="title">সুদমুক্ত অর্থনীতি</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> ডাঃ জাকির নায়েক</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1Y0IQnrwrlf1meOLHCfgD-vETjsJoM0PG/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1Y0IQnrwrlf1meOLHCfgD-vETjsJoM0PG" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 5. ব্যাংক ও আর্থিক প্রতিষ্ঠানে শরী আহ বোর্ড -->
                     <div class="book-card">
-                        <span class="book-index">০৫</span>
-                        <div class="title">ব্যাংক ও আর্থিক প্রতিষ্ঠানে শরী আহ বোর্ড</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মোঃ মুখলেছুর রহমান</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1XSKqkEs8_peMVJxTpoH9juMdcRdr4_aq/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1XSKqkEs8_peMVJxTpoH9juMdcRdr4_aq" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1XSKqkEs8_peMVJxTpoH9juMdcRdr4_aq/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ব্যাংক ও আর্থিক প্রতিষ্ঠানে শরী আহ বোর্ড পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1XSKqkEs8_peMVJxTpoH9juMdcRdr4_aq&sz=w400"
+                                alt="ব্যাংক ও আর্থিক প্রতিষ্ঠানে শরী আহ বোর্ড বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৫</span>
+                            <div class="title">ব্যাংক ও আর্থিক প্রতিষ্ঠানে শরী আহ বোর্ড</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মোঃ মুখলেছুর রহমান</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1XSKqkEs8_peMVJxTpoH9juMdcRdr4_aq/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1XSKqkEs8_peMVJxTpoH9juMdcRdr4_aq" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 6. ব্যবসা বাণিজ্যঃ করণীয় ও বর্জনীয় -->
                     <div class="book-card">
-                        <span class="book-index">০৬</span>
-                        <div class="title">ব্যবসা বাণিজ্যঃ করণীয় ও বর্জনীয়</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> জাকের উল্লাহ আবুল খায়ের</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1XL1gc_n2LqQitrALmD4OqUqETZYWVsl1/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1XL1gc_n2LqQitrALmD4OqUqETZYWVsl1" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1XL1gc_n2LqQitrALmD4OqUqETZYWVsl1/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ব্যবসা বাণিজ্যঃ করণীয় ও বর্জনীয় পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1XL1gc_n2LqQitrALmD4OqUqETZYWVsl1&sz=w400"
+                                alt="ব্যবসা বাণিজ্যঃ করণীয় ও বর্জনীয় বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৬</span>
+                            <div class="title">ব্যবসা বাণিজ্যঃ করণীয় ও বর্জনীয়</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> জাকের উল্লাহ আবুল খায়ের</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1XL1gc_n2LqQitrALmD4OqUqETZYWVsl1/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1XL1gc_n2LqQitrALmD4OqUqETZYWVsl1" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 7. বিশ্ববাজার ধসের মূল কারণ সুদ -->
                     <div class="book-card">
-                        <span class="book-index">০৭</span>
-                        <div class="title">বিশ্ববাজার ধসের মূল কারণ সুদ</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মুফতি মুহম্মদ শফী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1XHjNCrQBukyKq2_0gJB3eiq1y9yrtWwe/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1XHjNCrQBukyKq2_0gJB3eiq1y9yrtWwe" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1XHjNCrQBukyKq2_0gJB3eiq1y9yrtWwe/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="বিশ্ববাজার ধসের মূল কারণ সুদ পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1XHjNCrQBukyKq2_0gJB3eiq1y9yrtWwe&sz=w400"
+                                alt="বিশ্ববাজার ধসের মূল কারণ সুদ বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৭</span>
+                            <div class="title">বিশ্ববাজার ধসের মূল কারণ সুদ</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মুফতি মুহম্মদ শফী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1XHjNCrQBukyKq2_0gJB3eiq1y9yrtWwe/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1XHjNCrQBukyKq2_0gJB3eiq1y9yrtWwe" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 8. বিশ্বপরিস্থিতি অর্থনীতি ও ইসলাম বিষয়ক বিশ্লেষণ -->
                     <div class="book-card">
-                        <span class="book-index">০৮</span>
-                        <div class="title">বিশ্বপরিস্থিতি অর্থনীতি ও ইসলাম বিষয়ক বিশ্লেষণ</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> শাহ আবদুল হান্নান</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1XFtu0OLfmDLhoQQUTXE2H7gsHCb0UGZ0/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1XFtu0OLfmDLhoQQUTXE2H7gsHCb0UGZ0" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1XFtu0OLfmDLhoQQUTXE2H7gsHCb0UGZ0/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="বিশ্বপরিস্থিতি অর্থনীতি ও ইসলাম বিষয়ক বিশ্লেষণ পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1XFtu0OLfmDLhoQQUTXE2H7gsHCb0UGZ0&sz=w400"
+                                alt="বিশ্বপরিস্থিতি অর্থনীতি ও ইসলাম বিষয়ক বিশ্লেষণ বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৮</span>
+                            <div class="title">বিশ্বপরিস্থিতি অর্থনীতি ও ইসলাম বিষয়ক বিশ্লেষণ</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> শাহ আবদুল হান্নান</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1XFtu0OLfmDLhoQQUTXE2H7gsHCb0UGZ0/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1XFtu0OLfmDLhoQQUTXE2H7gsHCb0UGZ0" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 9. উপার্জন ইসলামী দৃষ্টিকোণ -->
                     <div class="book-card">
-                        <span class="book-index">০৯</span>
-                        <div class="title">উপার্জন ইসলামী দৃষ্টিকোণ</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> হাবিবুল্লাহ মুহাম্মদ ইকবাল</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1VzkO-oPAtlOURFBgQVs6kTrsLdrFIXQU/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1VzkO-oPAtlOURFBgQVs6kTrsLdrFIXQU" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1VzkO-oPAtlOURFBgQVs6kTrsLdrFIXQU/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="উপার্জন ইসলামী দৃষ্টিকোণ পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1VzkO-oPAtlOURFBgQVs6kTrsLdrFIXQU&sz=w400"
+                                alt="উপার্জন ইসলামী দৃষ্টিকোণ বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">০৯</span>
+                            <div class="title">উপার্জন ইসলামী দৃষ্টিকোণ</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> হাবিবুল্লাহ মুহাম্মদ ইকবাল</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1VzkO-oPAtlOURFBgQVs6kTrsLdrFIXQU/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1VzkO-oPAtlOURFBgQVs6kTrsLdrFIXQU" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 10. ইসলামের অর্থনৈতিক ব্যবস্থা -->
                     <div class="book-card">
-                        <span class="book-index">১০</span>
-                        <div class="title">ইসলামের অর্থনৈতিক ব্যবস্থা</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মাওলানা আবদুল আলী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1Vt7-sa9_erW5s2Ohfx-bXBlQGKoirfrV/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1Vt7-sa9_erW5s2Ohfx-bXBlQGKoirfrV" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1Vt7-sa9_erW5s2Ohfx-bXBlQGKoirfrV/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামের অর্থনৈতিক ব্যবস্থা পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1Vt7-sa9_erW5s2Ohfx-bXBlQGKoirfrV&sz=w400"
+                                alt="ইসলামের অর্থনৈতিক ব্যবস্থা বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১০</span>
+                            <div class="title">ইসলামের অর্থনৈতিক ব্যবস্থা</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মাওলানা আবদুল আলী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1Vt7-sa9_erW5s2Ohfx-bXBlQGKoirfrV/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1Vt7-sa9_erW5s2Ohfx-bXBlQGKoirfrV" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 11. ইসলামের অর্থনৈতিক বিপ্লব -->
                     <div class="book-card">
-                        <span class="book-index">১১</span>
-                        <div class="title">ইসলামের অর্থনৈতিক বিপ্লব</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> শাহ মুহাম্মদ হাবীবুর রহমান</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1VsEpJuHBg-CT_DxHrTb3UunaKSq9GZiz/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1VsEpJuHBg-CT_DxHrTb3UunaKSq9GZiz" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1VsEpJuHBg-CT_DxHrTb3UunaKSq9GZiz/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামের অর্থনৈতিক বিপ্লব পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1VsEpJuHBg-CT_DxHrTb3UunaKSq9GZiz&sz=w400"
+                                alt="ইসলামের অর্থনৈতিক বিপ্লব বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১১</span>
+                            <div class="title">ইসলামের অর্থনৈতিক বিপ্লব</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> শাহ মুহাম্মদ হাবীবুর রহমান</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1VsEpJuHBg-CT_DxHrTb3UunaKSq9GZiz/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1VsEpJuHBg-CT_DxHrTb3UunaKSq9GZiz" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 12. ইসলামের অর্থনীতি -->
                     <div class="book-card">
-                        <span class="book-index">১২</span>
-                        <div class="title">ইসলামের অর্থনীতি</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মাওলানা মুহাম্মদ আবদুর রহীম</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1Vs9vSwVLx0mQq9amseCt5KgIDe8h4lG0/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1Vs9vSwVLx0mQq9amseCt5KgIDe8h4lG0" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1Vs9vSwVLx0mQq9amseCt5KgIDe8h4lG0/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামের অর্থনীতি পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1Vs9vSwVLx0mQq9amseCt5KgIDe8h4lG0&sz=w400"
+                                alt="ইসলামের অর্থনীতি বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১২</span>
+                            <div class="title">ইসলামের অর্থনীতি</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মাওলানা মুহাম্মদ আবদুর রহীম</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1Vs9vSwVLx0mQq9amseCt5KgIDe8h4lG0/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1Vs9vSwVLx0mQq9amseCt5KgIDe8h4lG0" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 13. ইসলামে অর্থনৈতিক নিরাপত্তা -->
                     <div class="book-card">
-                        <span class="book-index">১৩</span>
-                        <div class="title">ইসলামে অর্থনৈতিক নিরাপত্তা</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> আল্লামা ইউসূফ আল-কারযাভী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1VoP04JkOtZ_ISCs7dc18SB69NRUnN6ix/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1VoP04JkOtZ_ISCs7dc18SB69NRUnN6ix" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1VoP04JkOtZ_ISCs7dc18SB69NRUnN6ix/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামে অর্থনৈতিক নিরাপত্তা পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1VoP04JkOtZ_ISCs7dc18SB69NRUnN6ix&sz=w400"
+                                alt="ইসলামে অর্থনৈতিক নিরাপত্তা বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৩</span>
+                            <div class="title">ইসলামে অর্থনৈতিক নিরাপত্তা</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> আল্লামা ইউসূফ আল-কারযাভী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1VoP04JkOtZ_ISCs7dc18SB69NRUnN6ix/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1VoP04JkOtZ_ISCs7dc18SB69NRUnN6ix" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 14. ইসলামী ব্যাংকিং ও অর্থায়ন পদ্ধতি সমস্যা ও সমাধান -->
                     <div class="book-card">
-                        <span class="book-index">১৪</span>
-                        <div class="title">ইসলামী ব্যাংকিং ও অর্থায়ন পদ্ধতি সমস্যা ও সমাধান</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মুফতি মুহম্মদ তকী উসমানী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1Vi71VmmkiFdZGbiGWLWMkGPLgGP2o6Ln/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1Vi71VmmkiFdZGbiGWLWMkGPLgGP2o6Ln" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1Vi71VmmkiFdZGbiGWLWMkGPLgGP2o6Ln/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামী ব্যাংকিং ও অর্থায়ন পদ্ধতি সমস্যা ও সমাধান পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1Vi71VmmkiFdZGbiGWLWMkGPLgGP2o6Ln&sz=w400"
+                                alt="ইসলামী ব্যাংকিং ও অর্থায়ন পদ্ধতি সমস্যা ও সমাধান বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৪</span>
+                            <div class="title">ইসলামী ব্যাংকিং ও অর্থায়ন পদ্ধতি সমস্যা ও সমাধান</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মুফতি মুহম্মদ তকী উসমানী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1Vi71VmmkiFdZGbiGWLWMkGPLgGP2o6Ln/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1Vi71VmmkiFdZGbiGWLWMkGPLgGP2o6Ln" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 15. ইসলামী দৃষ্টিকোণ থেকে অর্থশাস্ত্রের ভবিষ্যৎ -->
                     <div class="book-card">
-                        <span class="book-index">১৫</span>
-                        <div class="title">ইসলামী দৃষ্টিকোণ থেকে অর্থশাস্ত্রের ভবিষ্যৎ</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> ড. এম উমর চাপরা</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1Vfv5ZBj3H8yDcBLUg0URZecybzJ8uJHA/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1Vfv5ZBj3H8yDcBLUg0URZecybzJ8uJHA" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1Vfv5ZBj3H8yDcBLUg0URZecybzJ8uJHA/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামী দৃষ্টিকোণ থেকে অর্থশাস্ত্রের ভবিষ্যৎ পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1Vfv5ZBj3H8yDcBLUg0URZecybzJ8uJHA&sz=w400"
+                                alt="ইসলামী দৃষ্টিকোণ থেকে অর্থশাস্ত্রের ভবিষ্যৎ বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৫</span>
+                            <div class="title">ইসলামী দৃষ্টিকোণ থেকে অর্থশাস্ত্রের ভবিষ্যৎ</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> ড. এম উমর চাপরা</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1Vfv5ZBj3H8yDcBLUg0URZecybzJ8uJHA/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1Vfv5ZBj3H8yDcBLUg0URZecybzJ8uJHA" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 16. ইসলামী অর্থব্যবস্থার মূলনীতি -->
                     <div class="book-card">
-                        <span class="book-index">১৬</span>
-                        <div class="title">ইসলামী অর্থব্যবস্থার মূলনীতি</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মাওলানা সাইয়্যেদ আবুল আ'লা মওদুদী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1VaiIeFaAXvY__cYm2lbi7jy8jtbquM1Y/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1VaiIeFaAXvY__cYm2lbi7jy8jtbquM1Y" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1VaiIeFaAXvY__cYm2lbi7jy8jtbquM1Y/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামী অর্থব্যবস্থার মূলনীতি পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1VaiIeFaAXvY__cYm2lbi7jy8jtbquM1Y&sz=w400"
+                                alt="ইসলামী অর্থব্যবস্থার মূলনীতি বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৬</span>
+                            <div class="title">ইসলামী অর্থব্যবস্থার মূলনীতি</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মাওলানা সাইয়্যেদ আবুল আ'লা মওদুদী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1VaiIeFaAXvY__cYm2lbi7jy8jtbquM1Y/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1VaiIeFaAXvY__cYm2lbi7jy8jtbquM1Y" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 17. ইসলামী অর্থব্যবস্থায় যাকাত -->
                     <div class="book-card">
-                        <span class="book-index">১৭</span>
-                        <div class="title">ইসলামী অর্থব্যবস্থায় যাকাত</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> জাবেদ মুহাম্মদ</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1VXQgkU1NPS5GtirfF65xm9LZoOvoFd_a/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1VXQgkU1NPS5GtirfF65xm9LZoOvoFd_a" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1VXQgkU1NPS5GtirfF65xm9LZoOvoFd_a/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামী অর্থব্যবস্থায় যাকাত পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1VXQgkU1NPS5GtirfF65xm9LZoOvoFd_a&sz=w400"
+                                alt="ইসলামী অর্থব্যবস্থায় যাকাত বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৭</span>
+                            <div class="title">ইসলামী অর্থব্যবস্থায় যাকাত</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> জাবেদ মুহাম্মদ</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1VXQgkU1NPS5GtirfF65xm9LZoOvoFd_a/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1VXQgkU1NPS5GtirfF65xm9LZoOvoFd_a" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 18. ইসলামী অর্থনীতির ভূমিকা -->
                     <div class="book-card">
-                        <span class="book-index">১৮</span>
-                        <div class="title">ইসলামী অর্থনীতির ভূমিকা</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> খন্দকার আবুল খায়ের</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1VLOHPpppAmJvtLExgSBac9wmHemjLKuK/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1VLOHPpppAmJvtLExgSBac9wmHemjLKuK" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1VLOHPpppAmJvtLExgSBac9wmHemjLKuK/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামী অর্থনীতির ভূমিকা পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1VLOHPpppAmJvtLExgSBac9wmHemjLKuK&sz=w400"
+                                alt="ইসলামী অর্থনীতির ভূমিকা বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৮</span>
+                            <div class="title">ইসলামী অর্থনীতির ভূমিকা</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> খন্দকার আবুল খায়ের</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1VLOHPpppAmJvtLExgSBac9wmHemjLKuK/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1VLOHPpppAmJvtLExgSBac9wmHemjLKuK" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 19. ইসলামী অর্থনীতিতে মূদ্রানীতি ও ব্যংকিং ব্যবস্থার রুপরেখা -->
                     <div class="book-card">
-                        <span class="book-index">১৯</span>
-                        <div class="title">ইসলামী অর্থনীতিতে মূদ্রানীতি ও ব্যংকিং ব্যবস্থার রুপরেখা</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> ড. এম উমর চাপরা</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1VCF3tDg9mqI3R-4Lq7xxDoSk8fGKwsuZ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1VCF3tDg9mqI3R-4Lq7xxDoSk8fGKwsuZ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1VCF3tDg9mqI3R-4Lq7xxDoSk8fGKwsuZ/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামী অর্থনীতিতে মূদ্রানীতি ও ব্যংকিং ব্যবস্থার রুপরেখা পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1VCF3tDg9mqI3R-4Lq7xxDoSk8fGKwsuZ&sz=w400"
+                                alt="ইসলামী অর্থনীতিতে মূদ্রানীতি ও ব্যংকিং ব্যবস্থার রুপরেখা বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">১৯</span>
+                            <div class="title">ইসলামী অর্থনীতিতে মূদ্রানীতি ও ব্যংকিং ব্যবস্থার রুপরেখা</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> ড. এম উমর চাপরা</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1VCF3tDg9mqI3R-4Lq7xxDoSk8fGKwsuZ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1VCF3tDg9mqI3R-4Lq7xxDoSk8fGKwsuZ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 20. ইসলাম ও নয়া আন্তর্জাতিক অর্থব্যবস্থাঃ সামাজিক প্রেক্ষাপট -->
                     <div class="book-card">
-                        <span class="book-index">২০</span>
-                        <div class="title">ইসলাম ও নয়া আন্তর্জাতিক অর্থব্যবস্থাঃ সামাজিক প্রেক্ষাপট</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> এম রুহুল আমিন</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1Uyppd8VGNEDF6DhBEcqH80C33kLxox6y/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1Uyppd8VGNEDF6DhBEcqH80C33kLxox6y" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1Uyppd8VGNEDF6DhBEcqH80C33kLxox6y/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলাম ও নয়া আন্তর্জাতিক অর্থব্যবস্থাঃ সামাজিক প্রেক্ষাপট পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1Uyppd8VGNEDF6DhBEcqH80C33kLxox6y&sz=w400"
+                                alt="ইসলাম ও নয়া আন্তর্জাতিক অর্থব্যবস্থাঃ সামাজিক প্রেক্ষাপট বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২০</span>
+                            <div class="title">ইসলাম ও নয়া আন্তর্জাতিক অর্থব্যবস্থাঃ সামাজিক প্রেক্ষাপট</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> এম রুহুল আমিন</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1Uyppd8VGNEDF6DhBEcqH80C33kLxox6y/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1Uyppd8VGNEDF6DhBEcqH80C33kLxox6y" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 21. ইসলাম ও আধুনিক অর্থনীতি ও ব্যবসায়নীতি -->
                     <div class="book-card">
-                        <span class="book-index">২১</span>
-                        <div class="title">ইসলাম ও আধুনিক অর্থনীতি ও ব্যবসায়নীতি</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মুফতী তকি উসমানী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1UrdKz_ucJzBwFis-9IhbY5nFWhMyu1rq/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1UrdKz_ucJzBwFis-9IhbY5nFWhMyu1rq" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1UrdKz_ucJzBwFis-9IhbY5nFWhMyu1rq/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলাম ও আধুনিক অর্থনীতি ও ব্যবসায়নীতি পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1UrdKz_ucJzBwFis-9IhbY5nFWhMyu1rq&sz=w400"
+                                alt="ইসলাম ও আধুনিক অর্থনীতি ও ব্যবসায়নীতি বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২১</span>
+                            <div class="title">ইসলাম ও আধুনিক অর্থনীতি ও ব্যবসায়নীতি</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মুফতী তকি উসমানী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1UrdKz_ucJzBwFis-9IhbY5nFWhMyu1rq/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1UrdKz_ucJzBwFis-9IhbY5nFWhMyu1rq" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 22. ইসলাম ও অর্থনৈতিক চ্যালেঞ্জ -->
                     <div class="book-card">
-                        <span class="book-index">২২</span>
-                        <div class="title">ইসলাম ও অর্থনৈতিক চ্যালেঞ্জ</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> ডঃ এম ওমর চাপরা</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1Uj7YeDBR3I9AAP8dLpFMTwp9a7UcL5tC/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1Uj7YeDBR3I9AAP8dLpFMTwp9a7UcL5tC" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1Uj7YeDBR3I9AAP8dLpFMTwp9a7UcL5tC/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলাম ও অর্থনৈতিক চ্যালেঞ্জ পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1Uj7YeDBR3I9AAP8dLpFMTwp9a7UcL5tC&sz=w400"
+                                alt="ইসলাম ও অর্থনৈতিক চ্যালেঞ্জ বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২২</span>
+                            <div class="title">ইসলাম ও অর্থনৈতিক চ্যালেঞ্জ</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> ডঃ এম ওমর চাপরা</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1Uj7YeDBR3I9AAP8dLpFMTwp9a7UcL5tC/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1Uj7YeDBR3I9AAP8dLpFMTwp9a7UcL5tC" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 23. অর্থনৈতিক সমস্যার ইসলামী সমাধান -->
                     <div class="book-card">
-                        <span class="book-index">২৩</span>
-                        <div class="title">অর্থনৈতিক সমস্যার ইসলামী সমাধান</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> সাইয়েদ আবুল আ’লা মওদুদী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1UVDVNWodLLrX5g5kGKgHRSEI61Gq1KHp/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1UVDVNWodLLrX5g5kGKgHRSEI61Gq1KHp" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1UVDVNWodLLrX5g5kGKgHRSEI61Gq1KHp/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="অর্থনৈতিক সমস্যার ইসলামী সমাধান পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1UVDVNWodLLrX5g5kGKgHRSEI61Gq1KHp&sz=w400"
+                                alt="অর্থনৈতিক সমস্যার ইসলামী সমাধান বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২৩</span>
+                            <div class="title">অর্থনৈতিক সমস্যার ইসলামী সমাধান</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> সাইয়েদ আবুল আ’লা মওদুদী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1UVDVNWodLLrX5g5kGKgHRSEI61Gq1KHp/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1UVDVNWodLLrX5g5kGKgHRSEI61Gq1KHp" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 24. ইসলামে সম্পদ অর্জন ব্যয় ও বন্টন -->
                     <div class="book-card">
-                        <span class="book-index">২৪</span>
-                        <div class="title">ইসলামে সম্পদ অর্জন ব্যয় ও বন্টন</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মুহাম্মাদ নূরুল ইসলাম</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1VrOyYdNRe6x1_zJbQB1xpGfGaUv6W07-/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1VrOyYdNRe6x1_zJbQB1xpGfGaUv6W07-" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1VrOyYdNRe6x1_zJbQB1xpGfGaUv6W07-/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামে সম্পদ অর্জন ব্যয় ও বন্টন পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1VrOyYdNRe6x1_zJbQB1xpGfGaUv6W07-&sz=w400"
+                                alt="ইসলামে সম্পদ অর্জন ব্যয় ও বন্টন বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২৪</span>
+                            <div class="title">ইসলামে সম্পদ অর্জন ব্যয় ও বন্টন</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মুহাম্মাদ নূরুল ইসলাম</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1VrOyYdNRe6x1_zJbQB1xpGfGaUv6W07-/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1VrOyYdNRe6x1_zJbQB1xpGfGaUv6W07-" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 25. ইসলামে দারিদ্র বিমোচন -->
                     <div class="book-card">
-                        <span class="book-index">২৫</span>
-                        <div class="title">ইসলামে দারিদ্র বিমোচন</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> আল্লামা ইউসূফ আল কারযাভী</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1DNi6GmFAg6BkerCp63PlSbSm5YcZJx53/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1DNi6GmFAg6BkerCp63PlSbSm5YcZJx53" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1DNi6GmFAg6BkerCp63PlSbSm5YcZJx53/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামে দারিদ্র বিমোচন পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1DNi6GmFAg6BkerCp63PlSbSm5YcZJx53&sz=w400"
+                                alt="ইসলামে দারিদ্র বিমোচন বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২৫</span>
+                            <div class="title">ইসলামে দারিদ্র বিমোচন</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> আল্লামা ইউসূফ আল কারযাভী</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1DNi6GmFAg6BkerCp63PlSbSm5YcZJx53/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1DNi6GmFAg6BkerCp63PlSbSm5YcZJx53" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 26. মাল্টি লেবেল মার্কেটিং এর বিধান -->
                     <div class="book-card">
-                        <span class="book-index">২৬</span>
-                        <div class="title">মাল্টি লেবেল মার্কেটিং এর বিধান</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মুহাম্মদ তাজুল ইসলাম</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1XZby0L5UTOXmrzXqXOlqamZNwYoIT5yZ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1XZby0L5UTOXmrzXqXOlqamZNwYoIT5yZ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1XZby0L5UTOXmrzXqXOlqamZNwYoIT5yZ/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="মাল্টি লেবেল মার্কেটিং এর বিধান পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1XZby0L5UTOXmrzXqXOlqamZNwYoIT5yZ&sz=w400"
+                                alt="মাল্টি লেবেল মার্কেটিং এর বিধান বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২৬</span>
+                            <div class="title">মাল্টি লেবেল মার্কেটিং এর বিধান</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মুহাম্মদ তাজুল ইসলাম</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1XZby0L5UTOXmrzXqXOlqamZNwYoIT5yZ/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1XZby0L5UTOXmrzXqXOlqamZNwYoIT5yZ" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 27. ইসলামে মাল্টি লেবেল মার্কেটিং এর বিধান -->
                     <div class="book-card">
-                        <span class="book-index">২৭</span>
-                        <div class="title">ইসলামে মাল্টি লেবেল মার্কেটিং এর বিধান</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মোহাম্মদ তাজুল ইসলাম</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1VoU5KlFsD76AthoPYDYcpPxSKGKh0k-E/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1VoU5KlFsD76AthoPYDYcpPxSKGKh0k-E" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1VoU5KlFsD76AthoPYDYcpPxSKGKh0k-E/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামে মাল্টি লেবেল মার্কেটিং এর বিধান পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1VoU5KlFsD76AthoPYDYcpPxSKGKh0k-E&sz=w400"
+                                alt="ইসলামে মাল্টি লেবেল মার্কেটিং এর বিধান বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২৭</span>
+                            <div class="title">ইসলামে মাল্টি লেবেল মার্কেটিং এর বিধান</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মোহাম্মদ তাজুল ইসলাম</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1VoU5KlFsD76AthoPYDYcpPxSKGKh0k-E/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1VoU5KlFsD76AthoPYDYcpPxSKGKh0k-E" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 28. মাল্টি লেবেল মার্কেটিং প্রসঙ্গ -->
                     <div class="book-card">
-                        <span class="book-index">২৮</span>
-                        <div class="title">মাল্টি লেবেল মার্কেটিং প্রসঙ্গ</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> প্রফসর শাহ মুহাম্মদ হাবীবুর রহমান</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1XbkfVE6_hZXjpH-9CvT0R15rl6wBdkUb/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1XbkfVE6_hZXjpH-9CvT0R15rl6wBdkUb" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1XbkfVE6_hZXjpH-9CvT0R15rl6wBdkUb/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="মাল্টি লেবেল মার্কেটিং প্রসঙ্গ পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1XbkfVE6_hZXjpH-9CvT0R15rl6wBdkUb&sz=w400"
+                                alt="মাল্টি লেবেল মার্কেটিং প্রসঙ্গ বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২৮</span>
+                            <div class="title">মাল্টি লেবেল মার্কেটিং প্রসঙ্গ</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> প্রফসর শাহ মুহাম্মদ হাবীবুর রহমান</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1XbkfVE6_hZXjpH-9CvT0R15rl6wBdkUb/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1XbkfVE6_hZXjpH-9CvT0R15rl6wBdkUb" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 29. মাল্টি লেবেল মার্কেটিং এর রূপরেখা -->
                     <div class="book-card">
-                        <span class="book-index">২৯</span>
-                        <div class="title">মাল্টি লেবেল মার্কেটিং এর রূপরেখা</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> মুবাসসির মারজান</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1XaVd-Br5LsYyZLcGTiOqZF61cdcSxXrt/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1XaVd-Br5LsYyZLcGTiOqZF61cdcSxXrt" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1XaVd-Br5LsYyZLcGTiOqZF61cdcSxXrt/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="মাল্টি লেবেল মার্কেটিং এর রূপরেখা পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1XaVd-Br5LsYyZLcGTiOqZF61cdcSxXrt&sz=w400"
+                                alt="মাল্টি লেবেল মার্কেটিং এর রূপরেখা বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">২৯</span>
+                            <div class="title">মাল্টি লেবেল মার্কেটিং এর রূপরেখা</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> মুবাসসির মারজান</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1XaVd-Br5LsYyZLcGTiOqZF61cdcSxXrt/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1XaVd-Br5LsYyZLcGTiOqZF61cdcSxXrt" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 30. ইসলামী সংস্কৃতিতে পণ্য বিনিময় ও স্টক এক্সেঞ্জ -->
                     <div class="book-card">
-                        <span class="book-index">৩০</span>
-                        <div class="title">ইসলামী সংস্কৃতিতে পণ্য বিনিময় ও স্টক এক্সেঞ্জ</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> আবদুর রকীব</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1ViPs1w7OwYSXQFuTjCGq81S46Ttk-ee1/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1ViPs1w7OwYSXQFuTjCGq81S46Ttk-ee1" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1ViPs1w7OwYSXQFuTjCGq81S46Ttk-ee1/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ইসলামী সংস্কৃতিতে পণ্য বিনিময় ও স্টক এক্সেঞ্জ পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1ViPs1w7OwYSXQFuTjCGq81S46Ttk-ee1&sz=w400"
+                                alt="ইসলামী সংস্কৃতিতে পণ্য বিনিময় ও স্টক এক্সেঞ্জ বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">৩০</span>
+                            <div class="title">ইসলামী সংস্কৃতিতে পণ্য বিনিময় ও স্টক এক্সেঞ্জ</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> আবদুর রকীব</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1ViPs1w7OwYSXQFuTjCGq81S46Ttk-ee1/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1ViPs1w7OwYSXQFuTjCGq81S46Ttk-ee1" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 31. ব্যব্যসায় ইসলামি নৈতিকতা -->
                     <div class="book-card">
-                        <span class="book-index">৩১</span>
-                        <div class="title">ব্যব্যসায় ইসলামি নৈতিকতা</div>
-                        <div class="author"><i class="fas fa-user-pen"></i> রফিক ইসা বীকুন</div>
-                        <div class="book-actions">
-                            <a href="https://drive.google.com/file/d/1XN8il6XwBTXW1hloDtrY8fqF-kXbM5x_/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1XN8il6XwBTXW1hloDtrY8fqF-kXbM5x_" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
-                            <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                        <a href="https://drive.google.com/file/d/1XN8il6XwBTXW1hloDtrY8fqF-kXbM5x_/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="book-cover-link" aria-label="ব্যব্যসায় ইসলামি নৈতিকতা পড়ুন">
+                            <img
+                                src="https://drive.google.com/thumbnail?id=1XN8il6XwBTXW1hloDtrY8fqF-kXbM5x_&sz=w400"
+                                alt="ব্যব্যসায় ইসলামি নৈতিকতা বইয়ের প্রচ্ছদ"
+                                class="book-cover"
+                                loading="lazy"
+                                onerror="var s=this.src; var n=+(this.dataset.r||0); if(n<3){this.dataset.r=n+1; setTimeout(()=>{this.src=s+'\u0026q='+Date.now()}, 600+n*1500+Math.random()*1200);} else {this.style.display='none'; this.parentElement.classList.add('cover-fallback');}"
+                            >
+                            <span class="cover-fallback-icon"><i class="fas fa-book"></i></span>
+                        </a>
+                    
+                        <div class="book-content">
+                            <span class="book-index">৩১</span>
+                            <div class="title">ব্যব্যসায় ইসলামি নৈতিকতা</div>
+                            <div class="author"><i class="fas fa-user-pen"></i> রফিক ইসা বীকুন</div>
+                            <div class="book-actions">
+                                <a href="https://drive.google.com/file/d/1XN8il6XwBTXW1hloDtrY8fqF-kXbM5x_/view?usp=drivesdk" target="_blank" class="btn btn-read btn-sm"><i class="fas fa-book-open"></i> পড়ুন</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1XN8il6XwBTXW1hloDtrY8fqF-kXbM5x_" target="_blank" class="btn btn-download btn-sm"><i class="fas fa-download"></i></a>
+                                <a href="#" class="btn btn-share btn-sm"><i class="fas fa-share-alt"></i></a>
+                            </div>
                         </div>
                     </div>
 
