@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>আমার বই | মজলিস অনলাইন লাইব্রেরি</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/auth-shelf.css" />
+</head>
+
+<body class="shelf-page">
+
+    <!-- ================= HEADER ================= -->
+    <header class="header" role="banner">
+        <div class="container">
+
+            <a href="index.html" class="logo" aria-label="মজলিস অনলাইন লাইব্রেরি">
+                <span class="logo-icon"><i class="fas fa-book-open"></i></span>
+                মজলিস <span>লাইব্রেরি</span>
+            </a>
+
+            <nav class="header-nav" aria-label="প্রধান নেভিগেশন">
+                <a href="index.html">হোম</a>
+                <a href="books_category.html">সকল বই</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ================= BANNER ================= -->
+        <section class="shelf-banner" aria-labelledby="shelf-title">
+            <div class="container">
+                <h1 id="shelf-title">
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                    আমার বই
+                </h1>
+                <p>আপনার সংরক্ষিত বইগুলো এখানে জমা থাকে। পড়া শুরু করলে অবস্থা নিজে থেকেই বদলে যাবে।</p>
+                <div class="shelf-count">
+                    <i class="fas fa-book" aria-hidden="true"></i>
+                    <span id="shelfCount">০টি বই</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SHELF ================= -->
+        <section class="shelf-main" aria-labelledby="shelf-title">
+            <div class="container">
+
+                <div class="shelf-toolbar" id="shelfToolbar" hidden>
+                    <div class="shelf-filters" role="tablist" aria-label="বইয়ের অবস্থা অনুযায়ী ফিল্টার">
+                        <button type="button" class="shelf-filter is-active" data-filter="all"
+                                role="tab" aria-selected="true">সব</button>
+                        <button type="button" class="shelf-filter" data-filter="unread"
+                                role="tab" aria-selected="false">পড়া হয়নি</button>
+                        <button type="button" class="shelf-filter" data-filter="reading"
+                                role="tab" aria-selected="false">পড়ছি</button>
+                        <button type="button" class="shelf-filter" data-filter="done"
+                                role="tab" aria-selected="false">পড়া শেষ</button>
+                    </div>
+
+                    <label class="shelf-search">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <input type="search" id="shelfSearch" placeholder="আমার বইয়ে খুঁজুন..." />
+                    </label>
+                </div>
+
+                <div class="shelf-state" id="shelfState"></div>
+                <div class="shelf-grid" id="shelfGrid" hidden></div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="shelf-footer">
+        <div class="container">
+            <p>&copy; ২০২৬ <a href="index.html">মজলিস অনলাইন লাইব্রেরি</a> — বাংলাদেশ ইসলামী ছাত্র মজলিস</p>
+        </div>
+    </footer>
+
+    <script type="module" src="assets/js/auth.js"></script>
+    <script type="module" src="assets/js/shelf-page.js"></script>
+</body>
+</html>

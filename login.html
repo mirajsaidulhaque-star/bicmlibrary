@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>লগইন | মজলিস অনলাইন লাইব্রেরি</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/auth-shelf.css" />
+</head>
+
+<body class="auth-page">
+
+    <header class="auth-topbar">
+        <a href="index.html" class="auth-brand" aria-label="মজলিস অনলাইন লাইব্রেরি">
+            <span class="logo-icon"><i class="fas fa-book-open"></i></span>
+            মজলিস <span>লাইব্রেরি</span>
+        </a>
+        <a href="index.html" class="auth-back">
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            <span>হোমে ফিরুন</span>
+        </a>
+    </header>
+
+    <main class="auth-layout">
+
+        <!-- Brand panel -->
+        <section class="auth-aside" aria-hidden="true">
+            <div class="auth-aside-icon"><i class="fas fa-bookmark"></i></div>
+            <h2>আপনার ব্যক্তিগত<br />বইয়ের তাক</h2>
+            <p>
+                পছন্দের বই সংরক্ষণ করুন, পড়া শুরু করুন—আর যেকোনো ডিভাইস থেকে
+                ঠিক যেখানে থেমেছিলেন সেখান থেকেই চালিয়ে যান।
+            </p>
+            <ul class="auth-perks">
+                <li><i class="fas fa-check"></i> এক ক্লিকে বই সংরক্ষণ</li>
+                <li><i class="fas fa-check"></i> পড়া, পড়ছি ও পড়া শেষ—আলাদা তালিকা</li>
+                <li><i class="fas fa-check"></i> মোবাইল ও কম্পিউটারে একই শেলফ</li>
+            </ul>
+            <p class="auth-aside-quote">
+                “জ্ঞান অর্জন, চরিত্র গঠন ও সমাজ বিপ্লবের জিহাদে শরিক হোন”
+            </p>
+        </section>
+
+        <!-- Form card -->
+        <section class="auth-card">
+
+            <div class="auth-head" id="authHead">
+                <h1>স্বাগতম</h1>
+                <p>বই সংরক্ষণ করতে লগইন করুন অথবা নতুন অ্যাকাউন্ট খুলুন।</p>
+            </div>
+
+            <div class="auth-tabs" id="authTabs" role="tablist" aria-label="লগইন অথবা নিবন্ধন">
+                <button type="button" class="auth-tab is-active" data-tab="signin"
+                        role="tab" aria-selected="true" aria-controls="formSignin">
+                    লগইন
+                </button>
+                <button type="button" class="auth-tab" data-tab="signup"
+                        role="tab" aria-selected="false" aria-controls="formSignup">
+                    নতুন অ্যাকাউন্ট
+                </button>
+            </div>
+
+            <div class="auth-alert" id="authAlert" role="alert" aria-live="assertive" hidden></div>
+
+            <!-- ================= SIGN IN ================= -->
+            <form class="auth-form" id="formSignin" novalidate>
+
+                <button type="button" class="btn-google" data-google>
+                    <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
+                        <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.4 29.3 35 24 35c-6.1 0-11-4.9-11-11s4.9-11 11-11c2.8 0 5.4 1.1 7.4 2.8l5.7-5.7C33.6 6.1 29 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.3-.4-3.5z"/>
+                        <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 18.9 12 24 12c2.8 0 5.4 1.1 7.4 2.8l5.7-5.7C33.6 5.7 29 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+                        <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.3 0-9.7-3.5-11.3-8.3l-6.5 5C9.6 39.6 16.2 44 24 44z"/>
+                        <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.6l6.2 5.2C36.9 39.3 44 34 44 24c0-1.3-.1-2.3-.4-3.5z"/>
+                    </svg>
+                    গুগল দিয়ে চালিয়ে যান
+                </button>
+
+                <div class="auth-divider"><span>অথবা ইমেইল দিয়ে</span></div>
+
+                <label class="auth-field">
+                    <span>ইমেইল</span>
+                    <div class="auth-input">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <input type="email" name="email" inputmode="email" autocomplete="email"
+                               placeholder="you@example.com" required />
+                    </div>
+                    <p class="auth-hint" hidden></p>
+                </label>
+
+                <label class="auth-field">
+                    <span>পাসওয়ার্ড</span>
+                    <div class="auth-input">
+                        <i class="fas fa-lock" aria-hidden="true"></i>
+                        <input type="password" name="password" autocomplete="current-password"
+                               placeholder="আপনার পাসওয়ার্ড" required />
+                        <button type="button" class="pw-toggle" aria-label="পাসওয়ার্ড দেখুন">
+                            <i class="fas fa-eye" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <p class="auth-hint" hidden></p>
+                </label>
+
+                <div class="auth-row">
+                    <label class="auth-check">
+                        <input type="checkbox" name="remember" checked />
+                        মনে রাখুন
+                    </label>
+                    <button type="button" class="auth-link" data-goto="forgot">
+                        পাসওয়ার্ড ভুলে গেছেন?
+                    </button>
+                </div>
+
+                <button type="submit" class="auth-submit">লগইন করুন</button>
+
+                <p class="auth-foot">
+                    অ্যাকাউন্ট নেই? <button type="button" class="auth-link" data-goto="signup">নতুন অ্যাকাউন্ট খুলুন</button>
+                </p>
+            </form>
+
+            <!-- ================= SIGN UP ================= -->
+            <form class="auth-form" id="formSignup" hidden novalidate>
+
+                <button type="button" class="btn-google" data-google>
+                    <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
+                        <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.4 29.3 35 24 35c-6.1 0-11-4.9-11-11s4.9-11 11-11c2.8 0 5.4 1.1 7.4 2.8l5.7-5.7C33.6 6.1 29 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.3-.4-3.5z"/>
+                        <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 18.9 12 24 12c2.8 0 5.4 1.1 7.4 2.8l5.7-5.7C33.6 5.7 29 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+                        <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.3 0-9.7-3.5-11.3-8.3l-6.5 5C9.6 39.6 16.2 44 24 44z"/>
+                        <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.6l6.2 5.2C36.9 39.3 44 34 44 24c0-1.3-.1-2.3-.4-3.5z"/>
+                    </svg>
+                    গুগল দিয়ে শুরু করুন
+                </button>
+
+                <div class="auth-divider"><span>অথবা ইমেইল দিয়ে</span></div>
+
+                <label class="auth-field">
+                    <span>আপনার নাম</span>
+                    <div class="auth-input">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                        <input type="text" name="name" autocomplete="name"
+                               placeholder="পূর্ণ নাম" required />
+                    </div>
+                    <p class="auth-hint" hidden></p>
+                </label>
+
+                <label class="auth-field">
+                    <span>ইমেইল</span>
+                    <div class="auth-input">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <input type="email" name="email" inputmode="email" autocomplete="email"
+                               placeholder="you@example.com" required />
+                    </div>
+                    <p class="auth-hint" hidden></p>
+                </label>
+
+                <label class="auth-field">
+                    <span>পাসওয়ার্ড</span>
+                    <div class="auth-input">
+                        <i class="fas fa-lock" aria-hidden="true"></i>
+                        <input type="password" name="password" autocomplete="new-password"
+                               placeholder="কমপক্ষে ৬ অক্ষর" required />
+                        <button type="button" class="pw-toggle" aria-label="পাসওয়ার্ড দেখুন">
+                            <i class="fas fa-eye" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <p class="auth-hint" hidden></p>
+                </label>
+
+                <label class="auth-field">
+                    <span>পাসওয়ার্ড নিশ্চিত করুন</span>
+                    <div class="auth-input">
+                        <i class="fas fa-lock" aria-hidden="true"></i>
+                        <input type="password" name="confirm" autocomplete="new-password"
+                               placeholder="আবার পাসওয়ার্ড লিখুন" required />
+                    </div>
+                    <p class="auth-hint" hidden></p>
+                </label>
+
+                <button type="submit" class="auth-submit">অ্যাকাউন্ট তৈরি করুন</button>
+
+                <p class="auth-foot">
+                    অ্যাকাউন্ট তৈরি করার মাধ্যমে আপনি আমাদের
+                    <a href="index.html">শর্তাবলি</a> মেনে নিচ্ছেন।
+                </p>
+            </form>
+
+            <!-- ================= FORGOT PASSWORD ================= -->
+            <form class="auth-form" id="formForgot" hidden novalidate>
+
+                <div class="auth-head">
+                    <h1>পাসওয়ার্ড ভুলে গেছেন?</h1>
+                    <p>আপনার ইমেইল দিন, আমরা রিসেট করার লিংক পাঠাব।</p>
+                </div>
+
+                <label class="auth-field">
+                    <span>ইমেইল</span>
+                    <div class="auth-input">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <input type="email" name="email" inputmode="email" autocomplete="email"
+                               placeholder="you@example.com" required />
+                    </div>
+                    <p class="auth-hint" hidden></p>
+                </label>
+
+                <button type="submit" class="auth-submit">রিসেট লিংক পাঠান</button>
+
+                <p class="auth-foot">
+                    <button type="button" class="auth-link" data-goto="signin">লগইনে ফিরুন</button>
+                </p>
+            </form>
+
+            <!-- ================= SET NEW PASSWORD ================= -->
+            <form class="auth-form" id="formReset" hidden novalidate>
+
+                <div class="auth-head">
+                    <h1>নতুন পাসওয়ার্ড দিন</h1>
+                    <p><span data-reset-email></span> অ্যাকাউন্টের জন্য একটি নতুন পাসওয়ার্ড তৈরি করুন।</p>
+                </div>
+
+                <label class="auth-field">
+                    <span>নতুন পাসওয়ার্ড</span>
+                    <div class="auth-input">
+                        <i class="fas fa-lock" aria-hidden="true"></i>
+                        <input type="password" name="password" autocomplete="new-password"
+                               placeholder="কমপক্ষে ৬ অক্ষর" required />
+                        <button type="button" class="pw-toggle" aria-label="পাসওয়ার্ড দেখুন">
+                            <i class="fas fa-eye" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <p class="auth-hint" hidden></p>
+                </label>
+
+                <label class="auth-field">
+                    <span>পাসওয়ার্ড নিশ্চিত করুন</span>
+                    <div class="auth-input">
+                        <i class="fas fa-lock" aria-hidden="true"></i>
+                        <input type="password" name="confirm" autocomplete="new-password"
+                               placeholder="আবার পাসওয়ার্ড লিখুন" required />
+                    </div>
+                    <p class="auth-hint" hidden></p>
+                </label>
+
+                <button type="submit" class="auth-submit">পাসওয়ার্ড সংরক্ষণ করুন</button>
+            </form>
+
+            <!-- ================= STATUS / ACCOUNT (built by JS) ================= -->
+            <div class="auth-form auth-status" id="viewStatus" hidden></div>
+            <div class="auth-form auth-account" id="viewAccount" hidden></div>
+
+        </section>
+    </main>
+
+    <script type="module" src="assets/js/login.js"></script>
+</body>
+</html>

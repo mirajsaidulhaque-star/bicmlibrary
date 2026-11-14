@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /* ---- One profile document per user ---- */
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+
+      allow create: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['displayName', 'email', 'photoURL', 'createdAt'])
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() <= 80
+        && request.resource.data.email is string
+        && request.resource.data.email.size() <= 200
+        && request.resource.data.createdAt == request.time;
+
+      allow update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['displayName', 'photoURL', 'updatedAt'])
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() <= 80;
+
+      allow delete: if false;
+
+      /* ---- That user's bookshelf ---- */
+      match /shelf/{bookId} {
+        allow read, delete: if request.auth != null && request.auth.uid == uid;
+
+        allow create: if request.auth != null && request.auth.uid == uid
+          && bookId.matches('^[A-Za-z0-9_-]{10,60}$')
+          && request.resource.data.keys().hasOnly([
+               'bookId', 'title', 'author', 'category', 'categorySlug',
+               'coverUrl', 'readUrl', 'status', 'addedAt', 'updatedAt', 'lastOpenedAt'
+             ])
+          && request.resource.data.bookId == bookId
+          && request.resource.data.title is string
+          && request.resource.data.title.size() > 0
+          && request.resource.data.title.size() <= 200
+          && request.resource.data.status in ['unread', 'reading', 'done']
+          && request.resource.data.addedAt == request.time;
+
+        allow update: if request.auth != null && request.auth.uid == uid
+          && request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly(['status', 'updatedAt', 'lastOpenedAt'])
+          && request.resource.data.status in ['unread', 'reading', 'done'];
+      }
+    }
+
+    /* ---- Everything else is closed ---- */
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
