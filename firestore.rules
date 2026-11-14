@@ -45,6 +45,14 @@ service cloud.firestore {
       }
     }
 
+    /* ---- Public announcements (read-only feed) ----
+       Written from the Firebase console only. Guests can read too —
+       a closure notice is useless if only members see it. */
+    match /announcements/{announcementId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
     /* ---- Everything else is closed ---- */
     match /{document=**} {
       allow read, write: if false;

@@ -15,6 +15,8 @@ import {
 } from "./auth-core.js";
 import { siteUrl } from "./firebase-config.js";
 import "./shelf-ui.js";
+import "./mobile-nav.js";
+import "./announce.js";
 
 const LOGIN_URL = siteUrl("login.html");
 const SHELF_URL = siteUrl("my-shelf.html");

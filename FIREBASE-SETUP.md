@@ -149,8 +149,81 @@ The **সব / পড়া হয়নি / পড়ছি / পড়া শ
 count next to the title ("২টি বই") shows how many books match the current
 filter and search, not the total.
 
-## 8. Still to build
+## 8. Mobile bottom tab bar
 
-- Profile editing (display name, photo)
+On phones (viewport ≤ 768px) a fixed tab bar is injected by `mobile-nav.js` —
+no page is edited for it. Four tabs:
+
+| Tab | Bengali | Goes to |
+|---|---|---|
+| Home | হোম | `index.html` |
+| Search | খুঁজুন | `search.html` (placeholder, "শীঘ্রই আসছে") |
+| My books | আমার বই | `my-shelf.html`, with the live count badge |
+| Profile | প্রোফাইল | `profile.html` (placeholder, "শীঘ্রই আসছে") |
+
+Notes:
+
+- The header's login/bookmark widget is hidden on phones so the bar is the
+  single navigation surface; desktop keeps it as before.
+- The bar is not injected on the login page.
+- Toasts move above the bar on phones so they are never covered.
+- `search.html` and `profile.html` are `noindex` placeholders — real pages
+  will replace them later.
+
+## 9. Announcements bell (ঘোষণা ও সংবাদ)
+
+A public, one-way news feed shown to **everyone — guests included**. Nothing
+is stored per user, so it costs almost nothing.
+
+### One-time: publish the rules
+
+`firestore.rules` must be published **from this repo** (or paste its contents
+into Firebase console → Firestore → Rules → Publish). It adds:
+
+```
+match /announcements/{announcementId} {
+  allow read: if true;
+  allow write: if false;
+}
+```
+
+Until it is published the bell simply stays hidden (one console warning, no
+errors).
+
+### Writing an announcement
+
+Firebase console → Firestore Database → Start collection → id `announcements`,
+then add documents. Fields:
+
+| Field | Type | Required | Notes |
+|---|---|---|---|
+| `title` | string | yes | Panel heading, max 140 chars |
+| `body` | string | no | 1–2 lines, max 500 chars |
+| `createdAt` | timestamp | yes | Ordering + "new" detection — set to now |
+| `url` | string | no | https link → "বিস্তারিত পড়ুন" appears |
+| `type` | string | no | `news` (default) / `notice` / `offer` — icon color |
+| `active` | boolean | no | `false` hides it without deleting |
+
+The bell stays hidden until at least one announcement exists. Opening the
+panel marks everything seen; the red dot is per browser (`localStorage`),
+identical for guests and members.
+
+### Caching
+
+The list is fetched once and cached for 30 minutes
+(`bicm_ann_cache_v1`), so navigating between pages costs zero Firestore
+reads and the panel still works offline.
+
+### Local preview (testing only)
+
+Set `localStorage.bicm_announce_preview` to a JSON array of
+`{ id, title, body, createdAt(ms), url?, type? }` and the panel renders that
+instead of Firestore. It only affects the browser that set it — **remove it
+when done** (`localStorage.removeItem('bicm_announce_preview')`).
+
+## 10. Still to build
+
+- The real search page (overlay search backed by a static book index)
+- The real profile page (account details, name/photo editing, logout)
 - Sorting / manual reordering of the shelf
 - A "continue reading" strip on the home page
